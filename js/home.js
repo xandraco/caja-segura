@@ -73,7 +73,7 @@ const updateCountDown = () => {
     const now = new Date();
     if(restartTimer == 0){
         const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
-        restartTimer = 1
+        restartTimer = 1;
     }
     console.log('jolines, esto no funciona', nextUpdate)
     const difference = nextUpdate - now;
@@ -84,9 +84,9 @@ const updateCountDown = () => {
     CounterDisplay.textContent = display;
 
     if (difference < 0) {
-        clearInterval(intervalTimer); // Detener el contador si ha pasado el tiempo límite
+        restartTimer = 0;
+        clearInterval(CountDown); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
-        intervalTimer = setInterval(updateCountDown, 1000); // Reiniciar el contador
-        restartTimer = 0
+        CountDown = setInterval(updateCountDown, 1000); // Reiniciar el contador
     }
 }
