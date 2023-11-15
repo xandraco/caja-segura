@@ -33,7 +33,7 @@ const loadUser = () => {
                 const user = await response.json()
                 loggedUser = user.MESSAGE
                 const inputIdUser = document.getElementById('idUsuario')
-                inputIdUser.value = loggedUser.email
+                inputIdUser.value = loggedUser.id
                 titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
             })
