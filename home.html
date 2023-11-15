@@ -32,24 +32,14 @@
     </div>
 
     <div class="col-sm-9">
-      <div class="m-2">
-        <form class="form-block" method="POST" action="./Backend/Files/newPost.php">
-          <input type="hidden" name="idUsuario" id="idUsuario">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6">
-              <div class="form-group fl_icon">
-                <div class="icon"><i class="fa fa-user"></i></div>
-                <input class="form-input" type="text" placeholder="Post title" name="titulo">
-              </div>
-            </div>
-            <div class="col-xs-12">									
-              <div class="form-group">
-                <textarea class="form-input" required="" placeholder="Your text" name="mensaje"></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Publicar</button>
-          </div>
-        </form>
+      <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+        <div class="card-header">Token:</div>
+        <div class="card-body">
+          <h5 class="card-title">Tiempo restante <span id="tokenDisplay"></span></h5>
+          <p class="card-text"><span id="counter"></span></p>
+        </div>
+      </div><div class="m-2">
+        
       </div>
     </div>
   </div>
