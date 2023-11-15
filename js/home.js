@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const loadUser = () => {
     const url = window.location.search
     const params = new URLSearchParams(url)
-    const usuario = params.get('email')
+    const email = params.get('email')
 
-    if (usuario) {
+    if (email) {
         const sendData = {
-            usuario
+            email
         }
         fetch ('./Backend/Files/home.php', {
             method: 'POST',

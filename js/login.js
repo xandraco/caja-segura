@@ -1,4 +1,4 @@
-let usuario
+let user, email
 const btnLogin = document.getElementById('btnLogin')
 
 btnLogin.addEventListener('click', () => {
@@ -9,7 +9,7 @@ btnLogin.addEventListener('click', () => {
         // Enviamos una alerta
         activaAlerta('Los campos no pueden estar vacios')
     } else {
-        // intentamos loggearnosa
+        // intentamos loggearnos
         const sendData = {
             email: email.value,
             password: password.value
@@ -26,8 +26,8 @@ btnLogin.addEventListener('click', () => {
             // console.log(await response.json())
             const respuesta = await response.json()
             if (respuesta.MESSAGE === 'No se encontro el usuario') {
-                activaAlerta('El usuario no existe en la DB')
-            } else if (respuesta.MESSAGE === 'Invalid password') {
+                activaAlerta('El usuario no existe')
+            } else if (respuesta.MESSAGE === 'Contraseña incorrecta') {
                 activaAlerta('Contraseña incorrecta')
             } else if (respuesta.MESSAGE === 'success') {
                 usuario = respuesta.USUARIO['email']

@@ -3,8 +3,8 @@
   $conn = conectar();
   $dataPost = file_get_contents('php://input');
   $body = json_decode($dataPost, true);
-  $usuario = $body['usuario'];
-  $queryUsuario = "SELECT * FROM usuarios WHERE email = '$usuario'";
+  $email = $body['email'];
+  $queryUsuario = "SELECT * FROM users WHERE email = '$email'";
   $validaUsuario = mysqli_query($conn, $queryUsuario);
 
   if ($validaUsuario -> num_rows > 0) {

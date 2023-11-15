@@ -8,17 +8,16 @@
     $email = $body['email'];
     $password = $body['password'];
 
-    $queryUsuario = "SELECT * FROM usuarios WHERE email = '$email'";
-    $validaUsuario = mysqli_query($conn, $queryUsuario);
+    $queryuser = "SELECT * FROM users WHERE email = '$email'";
+    $validuser = mysqli_query($conn, $queryuser);
 
-    if($validaUsuario -> num_rows > 0) {
-      $usuario = $validaUsuario -> fetch_assoc();
+    if($validuser -> num_rows > 0) {
+      $usuario = $validuser -> fetch_assoc();
       if (password_verify($password, $usuario['password'])) {
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success', 'USUARIO' => $usuario]);
       } else {
-        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Invalid password']);
+        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
       }
-      // echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => $usuario]);
       die;
     } else {
       echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'No se encontro el usuario']);

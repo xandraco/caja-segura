@@ -1,23 +1,22 @@
 <?php 
   include("../config/conexion.php");
   $conn = conectar();
-  $nombre = $_POST['nombre'];
-  $apaterno = $_POST['apaterno'];
-  $amaterno = $_POST['amaterno'];
+  $user = $_POST['user'];
   $email = $_POST['email'];
   $password = $_POST['password'];
+  $admin = 0;
 
   // Verficar que el usuario exista
-  $queryVerifica = "SELECT * FROM usuarios
+  $queryver = "SELECT * FROM users
   WHERE email = '$email'";
 
-  $validaCorreo = mysqli_query($conn, $queryVerifica);
-  if ($validaCorreo->num_rows==0) {
+  $validemail = mysqli_query($conn, $queryver);
+  if ($validemail->num_rows==0) {
     // usuario no existe
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-    $queryInsert = "INSERT INTO usuarios
-      VALUES(null, '$nombre', '$apaterno', '$amaterno', '$email', '$passwordHash')";
+    $queryInsert = "INSERT INTO users
+      VALUES(null, '$user', '$email', '$passwordHash')";
     
     $result = mysqli_query($conn, $queryInsert);
     if ($result) {
