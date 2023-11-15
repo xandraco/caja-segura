@@ -62,7 +62,7 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then((response) => response.json())
+        .then( async(response) => await response.json())
         .catch(error => {
             console.error('Error al enviar el token al PHP:', error);
         });

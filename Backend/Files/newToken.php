@@ -6,7 +6,6 @@ $body = json_decode($dataPost, true);
 $token = $body['token'];
 $idUsuario = $body['idUsuario'];
 
-echo $idUsuario;
 $queryCheckExisting = "SELECT * FROM tokenActual WHERE id = $idUsuario";
 $resultadoCheck = mysqli_query($conn, $queryCheckExisting);
 
