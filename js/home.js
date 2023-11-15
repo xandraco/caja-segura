@@ -9,7 +9,6 @@ const contadorDisplay = document.getElementById('counter');
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUser()
-    genToken(); // Generar token al inicio
 
     // Iniciar contador para regenerar token cada 5 minutos
     tokenInterval = setInterval(genToken, 300000); // 300000 ms = 5 minutos
@@ -36,6 +35,7 @@ const loadUser = () => {
                 inputIdUser.value = loggedUser.id
                 titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
+                genToken(); // Generar token al inicio
             })
     }
 }
