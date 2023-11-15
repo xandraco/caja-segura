@@ -60,7 +60,7 @@
             <button type="submit" class="btn btn-primary">Publicar</button>
           </div>
         </form>
-        <a href="/SecureLogin/logout.php">Cerrar Sesión</a>
+        <a href="/SecureLogin//logout.php">Cerrar Sesión</a>
       </div>
     </div>
   </div>
