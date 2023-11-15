@@ -20,6 +20,9 @@
     if (count($validuser) > 0) {
       $usuario = $validuser[0];
       if (password_verify($password, $usuario['password'])) {
+        // Almacenamos la información de la sesión
+        $_SESSION['usuario'] = $usuario;
+
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success', 'USUARIO' => $usuario]);
       } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
