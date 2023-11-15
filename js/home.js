@@ -46,7 +46,7 @@ const genToken = () => {
     tokenDisplay.textContent = tokenValue;
 
     // Inserta el token en la base de datos (usando fetch o tu método de envío de datos)
-    SendToken(tokenValue);
+    SendToken(token);
 }
 
 const SendToken = (token) => {
