@@ -16,7 +16,7 @@
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
     $queryInsert = "INSERT INTO users
-      VALUES(null, '$user', '$email', '$passwordHash')";
+      VALUES(null, '$user', '$email', '$passwordHash', $admin)";
     
     $result = mysqli_query($conn, $queryInsert);
     if ($result) {
