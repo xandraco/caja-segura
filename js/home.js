@@ -52,7 +52,6 @@ const genToken = () => {
 
 const SendToken = (token) => {
     const idUsuario = loggedUser.id;
-
     const sendData = {
         token,
         idUsuario
@@ -63,7 +62,7 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then(async(response) => await response.json())
+        .then((response) => response.json())
         .catch(error => {
             console.error('Error al enviar el token al PHP:', error);
         });
