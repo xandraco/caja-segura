@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUser()
 
     // Iniciar contador para regenerar token cada 5 minutos
-    tokenInterval = setInterval(genToken, 3000); // 300000 ms = 5 minutos
+    tokenInterval = setInterval(genToken, 300000); // 300000 ms = 5 minutos
 })
 
 const loadUser = () => {
@@ -26,7 +26,7 @@ const loadUser = () => {
         fetch('./Backend/Files/home.php', {
             method: 'POST',
             body: JSON.stringify(sendData),
-            headers: { 'Content-Type': 'application/json ' }
+            headers: { 'Content-Type': 'application/json' }
         })
             .then(async (response) => {
                 const user = await response.json()
@@ -60,7 +60,7 @@ const SendToken = (token) => {
     fetch('./Backend/Files/newToken.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
-        headers: { 'Content-Type': 'application/json ' }
+        headers: { 'Content-Type': 'application/json' }
     })
         .then(async(response) => await response.json())
         .catch(error => {
