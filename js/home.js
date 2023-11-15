@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const loadUser = () => {
     const url = window.location.search
     const params = new URLSearchParams(url)
-    const email = params.get('email')
+    const email = params.get('email') 
 
     if (email) {
         const sendData = {
@@ -20,11 +20,11 @@ const loadUser = () => {
             headers: { 'Content-Type': 'application/json '}
         })
         .then( async (response) => {
-            const user = await response.json()
-            loggedUser = user.MESSAGE
+            const email = await response.json()
+            loggedUser = email.MESSAGE
             const inputIdUser = document.getElementById('idUsuario')
             inputIdUser.value = loggedUser.email
-            titulo.innerHTML = loggedUser.nombre
+            titulo.innerHTML = loggedUser.email
             console.log('response => ', loggedUser)
         })
     }
