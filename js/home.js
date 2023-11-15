@@ -6,6 +6,7 @@ let tokenInterval = null; // Variable para almacenar el intervalo del contador
 let tokenValue = ''; // Variable para almacenar el valor del token
 const tokenDisplay = document.getElementById('tokenDisplay');
 const CounterDisplay = document.getElementById('counter');
+let restartTimer = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUser()
@@ -70,7 +71,10 @@ const SendToken = (token) => {
 
 const updateCountDown = () => {
     const now = new Date();
-    const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+    if(restartTimer = 0){
+        const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+        restartTimer = 1
+    }
     console.log('jolines, esto no funciona', nextUpdate)
     const difference = nextUpdate - now;
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -83,5 +87,6 @@ const updateCountDown = () => {
         clearInterval(intervalTimer); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
         intervalTimer = setInterval(updateCountDown, 1000); // Reiniciar el contador
+        restartTimer = 0
     }
 }
