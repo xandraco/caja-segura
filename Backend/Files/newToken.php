@@ -6,7 +6,22 @@ $body = json_decode($dataPost, true);
 $token = $body['token'];
 $idUsuario = $body['idUsuario'];
 
-$queryInsertToken = "INSERT INTO tokenActual VALUES (NULL, '$token', '$idUsuario')";
+$queryCheckExisting = "SELECT * FROM tokenActual WHERE id = '$idUsuario'";
+$resultadoCheck = mysqli_query($conn, $queryCheckExisting);
+
+if ($resultadoCheck && mysqli_num_rows($resultadoCheck) > 0) {
+  // Si existe un registro para este usuario, elimínalo
+  $queryDeleteExisting = "DELETE FROM tokenActual WHERE id = '$idUsuario'";
+  $resultadoDelete = mysqli_query($conn, $queryDeleteExisting);
+
+  if (!$resultadoDelete) {
+    echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al eliminar el token existente']);
+    exit();
+  }
+}
+
+
+$queryInsertToken = "INSERT INTO tokenActual VALUES ($idUsuario, $token, $idUsuario)";
 $resultadoInsert = mysqli_query($conn, $queryInsertToken);
 
 if ($resultadoInsert) {

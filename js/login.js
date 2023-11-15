@@ -31,7 +31,7 @@ btnLogin.addEventListener('click', () => {
                 activaAlerta('Contraseña incorrecta')
             } else if (respuesta.MESSAGE === 'success') {
                 usuario = respuesta.USUARIO['email']
-                window.location.replace(`/home.html?email=${usuario}`)
+                window.location.replace(`CheckToken/home.html?email=${usuario}`)
             } else {
                 activaAlerta('Algo ha salido mal')
             }
