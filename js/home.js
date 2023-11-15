@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUser()
 
     // Iniciar contador para regenerar token cada 5 minutos
-    tokenInterval = setInterval(genToken, 300000); // 300000 ms = 5 minutos
+    tokenInterval = setInterval(genToken, 60000); // 300000 ms = 5 minutos
 })
 
 const loadUser = () => {
@@ -31,6 +31,7 @@ const loadUser = () => {
             .then(async (response) => {
                 const user = await response.json()
                 loggedUser = user.MESSAGE
+                titulo.innerHTML = loggedUser.email
                 console.log('response => ', loggedUser)
                 genToken(); // Generar token al inicio
             })
@@ -62,8 +63,5 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then(async(response) => await response.json())
-        .catch(error => {
-            console.error('Error al enviar el token al PHP:', error);
-        });
+        .then(async(response) => console.log(await response.json()));
 }
