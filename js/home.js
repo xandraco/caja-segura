@@ -24,7 +24,7 @@ const loadUser = () => {
             loggedUser = user.MESSAGE
             const inputIdUser = document.getElementById('idUsuario')
             inputIdUser.value = loggedUser.email
-            titulo.innerHTML = loggedUser.nombre
+            titulo.innerHTML = loggedUser.user
             console.log('response => ', loggedUser)
         })
     }
