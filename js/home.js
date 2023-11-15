@@ -65,7 +65,7 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json ' }
     })
-        .then(response => response.json())
+        .then(async(response) => await response.json())
         .then(data => {
             console.log('Token enviado al PHP y almacenado en la base de datos:', data);
         })
