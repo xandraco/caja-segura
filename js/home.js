@@ -31,7 +31,7 @@ const loadUser = () => {
             .then(async (response) => {
                 const user = await response.json()
                 loggedUser = user.MESSAGE
-                titulo.innerHTML = loggedUser.email
+                titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
                 genToken(); // Generar token al inicio
             })
@@ -63,5 +63,8 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then(async(response) => console.log(await response.json()));
+        .then(async(response) => await response.json())
+        .catch(error => {
+            console.error('Error al enviar el token al PHP:', error);
+        });
 }
