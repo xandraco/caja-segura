@@ -59,7 +59,7 @@ const SendToken = (token) => {
         token,
         idUsuario
     };
-
+    console.log(sendData)
     fetch('./Backend/Files/newToken.php', {
         method: 'POST',
         body: JSON.stringify(sendData),

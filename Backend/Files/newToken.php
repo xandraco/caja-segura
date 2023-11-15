@@ -6,8 +6,10 @@ $body = json_decode($dataPost, true);
 $token = $body['token'];
 $idUsuario = $body['idUsuario'];
 
+echo $idUsuario;
 $queryCheckExisting = "SELECT * FROM tokenActual WHERE id = $idUsuario";
 $resultadoCheck = mysqli_query($conn, $queryCheckExisting);
+
 
 if ($resultadoCheck && mysqli_num_rows($resultadoCheck) > 0) {
   // Si existe un registro para este usuario, elimínalo
