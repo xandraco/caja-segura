@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUser()
 
     // Iniciar contador para regenerar token cada 5 minutos
-    tokenInterval = setInterval(genToken, 300000); // 300000 ms = 5 minutos
+    // tokenInterval = setInterval(genToken, 300000); // 300000 ms = 5 minutos
 })
 
 const loadUser = () => {
@@ -31,9 +31,6 @@ const loadUser = () => {
             .then(async (response) => {
                 const user = await response.json()
                 loggedUser = user.MESSAGE
-                const inputIdUser = document.getElementById('idUsuario')
-                inputIdUser.value = loggedUser.id
-                titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
                 genToken(); // Generar token al inicio
             })
