@@ -41,7 +41,7 @@ btnLogin.addEventListener('click', () => {
 
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
-                window.location.replace('/SecureLogin/home.html');
+                window.location.replace('/SecureLogin/home.php');
               }, 2000);
             })
             .catch((error) => {
