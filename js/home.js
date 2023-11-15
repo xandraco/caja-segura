@@ -75,7 +75,6 @@ const updateCountDown = () => {
         const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
         restartTimer = 1;
     }
-    console.log('jolines, esto no funciona', nextUpdate)
     const difference = nextUpdate - now;
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
