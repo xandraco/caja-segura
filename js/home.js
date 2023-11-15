@@ -63,9 +63,6 @@ const SendToken = (token) => {
         headers: { 'Content-Type': 'application/json ' }
     })
         .then(async(response) => await response.json())
-        .then(data => {
-            console.log('Token enviado al PHP y almacenado en la base de datos:', data);
-        })
         .catch(error => {
             console.error('Error al enviar el token al PHP:', error);
         });
