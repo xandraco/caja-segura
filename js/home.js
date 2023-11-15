@@ -77,7 +77,7 @@ const updateCountDown = () => {
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
     const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    document.getElementById('counter').textContent = display;
+    contadorDisplay.textContent = display;
 
     if (difference < 0) {
         clearInterval(intervalTimer); // Detener el contador si ha pasado el tiempo límite
