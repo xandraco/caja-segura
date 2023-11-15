@@ -9,9 +9,6 @@ const contadorDisplay = document.getElementById('counter');
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUser()
-
-    // Iniciar contador para regenerar token cada 5 minutos
-    tokenInterval = setInterval(genToken, 60000); // 300000 ms = 5 minutos
 })
 
 const loadUser = () => {
@@ -34,6 +31,9 @@ const loadUser = () => {
                 titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
                 genToken(); // Generar token al inicio
+                tokenInterval = setInterval(genToken, 60000); // 300000 ms = 5 minutos
+                updateCountDown()
+                CountDown = setInterval(updateCountDown, 1000);
             })
     }
 }
@@ -66,4 +66,22 @@ const SendToken = (token) => {
         .catch(error => {
             console.error('Error al enviar el token al PHP:', error);
         });
+}
+
+const updateCountDown = () => {
+    const now = new Date();
+    const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+
+    const difference = nextUpdate - now;
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('counter').textContent = display;
+
+    if (difference < 0) {
+        clearInterval(intervalTimer); // Detener el contador si ha pasado el tiempo límite
+        genToken(); // Generar un nuevo token
+        intervalTimer = setInterval(updateTokenCountdown, 1000); // Reiniciar el contador
+    }
 }
