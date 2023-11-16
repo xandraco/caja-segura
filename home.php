@@ -3,7 +3,7 @@
 
   // Verifica si no hay una sesión activa
   if (!isset($_SESSION['usuario'])) {
-    header('Location: /SecureLogin/'); // Cambia la ruta según tu estructura de archivos
+    header('Location: /'); // Cambia la ruta según tu estructura de archivos
     exit();
   }
 ?>
@@ -60,7 +60,7 @@
             <button type="submit" class="btn btn-primary">Publicar</button>
           </div>
         </form>
-        <a href="/SecureLogin//logout.php">Cerrar Sesión</a>
+        <a href="/logout.php">Cerrar Sesión</a>
       </div>
     </div>
   </div>
