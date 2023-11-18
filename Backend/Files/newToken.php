@@ -1,34 +1,40 @@
 <?php
+  session_start();
+
   include("../config/conexion.php");
   $conn = conectar();
   $dataPost = file_get_contents('php://input');
   $body = json_decode($dataPost, true);
-  $token = $body['token'];
-  $idUsuario = $body['idUsuario'];
-  $tokenhash = password_hash($token, PASSWORD_BCRYPT);
 
-  $queryCheckExisting = "SELECT * FROM tokenActual WHERE id = '$idUsuario'";
-  $resultadoCheck = mysqli_query($conn, $queryCheckExisting);
+  if ($body !== null) {
+    $email = $body['email'];
+    $password = $body['password'];
 
+    // Buscamos el usuario dentro de la base de datos
+    $queryuser = "SELECT * FROM users WHERE email = :email";
+    $stmt = $conn -> prepare ($queryuser);
+    $stmt -> bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt -> execute();
+    $validuser = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-  if ($resultadoCheck && mysqli_num_rows($resultadoCheck) > 0) {
-    // Si existe un registro para este usuario, elimínalo
-    $queryDeleteExisting = "DELETE FROM tokenActual WHERE id = '$idUsuario'";
-    $resultadoDelete = mysqli_query($conn, $queryDeleteExisting);
+    if (count($validuser) > 0) {
+      $usuario = $validuser[0];
+      if (password_verify($password, $usuario['password'])) {
+        // Almacenamos la información de la sesión
+        $_SESSION['usuario'] = $usuario;
 
-    if (!$resultadoDelete) {
-      echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al eliminar el token existente']);
-      exit();
+        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success']);
+      } else {
+        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
+      }
+      die;
+    } else {
+      echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'No se encontro el usuario']);
     }
-  }
 
-
-  $queryInsertToken = "INSERT INTO tokenActual VALUES ('$idUsuario', '$tokenhash', '$idUsuario')";
-  $resultadoInsert = mysqli_query($conn, $queryInsertToken);
-
-  if ($resultadoInsert) {
-    echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token almacenado en la base de datos']);
+    // echo $email . ' ' . $password;
   } else {
-    echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
+    http_response_code(400);
+    echo 'Invalid Data';
   }
 ?>

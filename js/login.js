@@ -41,8 +41,8 @@ btnLogin.addEventListener('click', () => {
 
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
-                window.location.replace('/home.php');
-              }, 2000);
+                window.location.replace('/CheckToken/home.php');
+              }, 1000);
             })
             .catch((error) => {
               console.log('Error al almacenar la sesión: ', error);
@@ -59,13 +59,14 @@ btnLogin.addEventListener('click', () => {
   }
 });
 
-const activaAlerta = (mensaje) => {
-  const alerta = document.getElementsByClassName('alert');
-  alerta[0].innerHTML = mensaje;
-  alerta[0].classList.remove('hide');
-  alerta[0].classList.add('show');
-  setTimeout(() => {
-    alerta[0].classList.remove('show');
-    alerta[0].classList.add('hide');
-  }, 3000);
-};
+const activaAlerta = mensaje => {
+    const alerta =document.getElementsByClassName('alert')
+    console.log('alerta', alerta)
+    alerta[0].innerHTML = mensaje
+    alerta[0].classList.remove('hide')
+    alerta[0].classList.add('show')
+    setTimeout(() => {
+        alerta[0].classList.remove('show')
+        alerta[0].classList.add('hide')
+    }, 3000)
+}
