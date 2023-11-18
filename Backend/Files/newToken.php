@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("../config/conexion.php");
 $conn = conectar();
 $dataPost = file_get_contents('php://input');
