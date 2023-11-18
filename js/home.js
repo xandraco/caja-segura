@@ -30,10 +30,10 @@ const loadUser = () => {
                 loggedUser = user.MESSAGE
                 titulo.innerHTML = loggedUser.user
                 console.log('response => ', loggedUser)
+
                 genToken(); // Generar token al inicio
-                tokenInterval = setInterval(genToken, 60000); // 300000 ms = 5 minutos
-                updateCountDown()
-                CountDown = setInterval(updateCountDown, 1000);
+                const now = new Date();
+                CountDown = setInterval(updateCountDown(now), 1000);
             })
     }
 }
@@ -68,12 +68,11 @@ const SendToken = (token) => {
         });
 }
 
-const updateCountDown = () => {
-    const now = new Date();
-    const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+const updateCountDown = (now) => {
 
-    const difference = nextUpdate - now;
-    console.log(difference)
+    const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+    const difference = nextUpdate - now
+
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
@@ -84,5 +83,6 @@ const updateCountDown = () => {
         clearInterval(CountDown); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
         CountDown = setInterval(updateCountDown, 1000); // Reiniciar el contador
+        nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
     }
 }
