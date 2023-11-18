@@ -1,4 +1,5 @@
 let loggedUser = {}
+
 const titulo = document.getElementById('userBlog')
 
 // Contador y token:
@@ -9,36 +10,34 @@ const CounterDisplay = document.getElementById('counter');
 let timer = 60;
 
 document.addEventListener('DOMContentLoaded', () => {
+    $.ajax({
+        type: 'GET',
+        url: './files/session.php',
+        dataType: 'json',
+        success: function(response) {
+            // Manejar la respuesta del servidor
+            if (response.STATUS === 'SUCCESS') {
+                // Acceder a los datos de sesión desde la respuesta JSON
+                loggedUser = response.USER;
+                console.log('email:', loggedUser);
+            } else {
+                console.error('Error:', response.MESSAGE);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error de AJAX:', status, error);
+        }
+    });
     loadUser()
     CounterDisplay.textContent = timer.toString()
 })
 
 const loadUser = () => {
-    const url = window.location.search
-    const params = new URLSearchParams(url)
-    const email = params.get('email') 
-
-    if (email) {
-        const sendData = {
-            email
-        }
-        fetch('./Backend/Files/home.php', {
-            method: 'POST',
-            body: JSON.stringify(sendData),
-            headers: { 'Content-Type': 'application/json' }
-        })
-            .then(async (response) => {
-                const user = await response.json()
-                loggedUser = user.MESSAGE
-                titulo.innerHTML = loggedUser.user
-                console.log('response => ', loggedUser)
-
+                titulo.innerHTML = loggedUser.user;
                 genToken(); // Generar token al inicio
                 countDown = setInterval(updateCountDown, 1000);
-            })
-    }
-}
-
+        }
+    
 const genToken = () => {
     // Genera un token aleatorio de 6 dígitos
     const token = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;

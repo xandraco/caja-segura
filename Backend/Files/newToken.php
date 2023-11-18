@@ -5,32 +5,39 @@ include("../config/conexion.php");
 $conn = conectar();
 $dataPost = file_get_contents('php://input');
 $body = json_decode($dataPost, true);
+
 $token = $body['token'];
 $idUsuario = $body['idUsuario'];
 $tokenhash = password_hash($token, PASSWORD_BCRYPT);
 
-$queryCheckExisting = "SELECT * FROM tokenActual WHERE id = '$idUsuario'";
-$resultadoCheck = mysqli_query($conn, $queryCheckExisting);
+$queryCheckExisting = "SELECT * FROM tokenActual WHERE id = :idUsuario";
+$stmt = $conn->prepare($queryCheckExisting);
+$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+$stmt->execute();
+$validTokens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+if (count($validTokens) > 0) {
+    // Si existe un registro para este usuario, elimínalo
+    $queryDeleteExisting = "DELETE FROM tokenActual WHERE id = :idUsuario";
+    $stmtDelete = $conn->prepare($queryDeleteExisting);
+    $stmtDelete->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+    $stmtDelete->execute();
 
-if ($resultadoCheck && mysqli_num_rows($resultadoCheck) > 0) {
-  // Si existe un registro para este usuario, elimínalo
-  $queryDeleteExisting = "DELETE FROM tokenActual WHERE id = '$idUsuario'";
-  $resultadoDelete = mysqli_query($conn, $queryDeleteExisting);
-
-  if (!$resultadoDelete) {
-    echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al eliminar el token existente']);
-    exit();
-  }
+    if (!$stmtDelete) {
+        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al eliminar el token existente']);
+        exit();
+    }
 }
 
+$queryInsertToken = "INSERT INTO tokenActual (id, token, idUsuario) VALUES (:idUsuario, :tokenhash, :idUsuario)";
+$stmtInsert = $conn->prepare($queryInsertToken);
+$stmtInsert->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+$stmtInsert->bindParam(":tokenhash", $tokenhash, PDO::PARAM_STR);
+$stmtInsert->execute();
 
-$queryInsertToken = "INSERT INTO tokenActual VALUES ('$idUsuario', '$tokenhash', '$idUsuario')";
-$resultadoInsert = mysqli_query($conn, $queryInsertToken);
-
-if ($resultadoInsert) {
-  echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token almacenado en la base de datos']);
+if ($stmtInsert) {
+    echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token almacenado en la base de datos']);
 } else {
-  echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
+    echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
 }
 ?>

@@ -14,7 +14,7 @@ if (isset($_SESSION['usuario'])) {
         // Almacena la información del usuario en la sesión
         $_SESSION['usuario'] = $userData['usuario'];
 
-        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Sesión almacenada correctamente']);
+        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Sesion validada','USER' => $userData]);
     } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Datos no válidos']);
     }

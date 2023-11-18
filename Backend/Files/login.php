@@ -23,7 +23,7 @@
         // Almacenamos la información de la sesión
         $_SESSION['usuario'] = $usuario;
 
-        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success', 'USUARIO' => $usuario['email']]);
+        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success', 'USUARIO' => $usuario]);
       } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
       }

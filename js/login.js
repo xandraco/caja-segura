@@ -42,7 +42,7 @@ btnLogin.addEventListener('click', () => {
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
                 window.location.replace('/CheckToken/home.php');
-              }, 200000);
+              }, 1000);
             })
             .catch((error) => {
               console.log('Error al almacenar la sesión: ', error);
