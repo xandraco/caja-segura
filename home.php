@@ -3,7 +3,7 @@
 
   // Verifica si no hay una sesión activa
   if (!isset($_SESSION['usuario'])) {
-    header('Location: /'); // Cambia la ruta según tu estructura de archivos
+    header('Location: /CheckToken/'); // Cambia la ruta según tu estructura de archivos
     exit();
   }
 ?>
@@ -49,7 +49,7 @@
           <p class="card-text"><span id="tokenDisplay"></span></p>
         </div>
       </div><div class="m-2">
-      <a href="/logout.php">Cerrar Sesión</a>
+      <a href="/CheckToken/logout.php">Cerrar Sesión</a>
       </div>
     </div>
   </div>

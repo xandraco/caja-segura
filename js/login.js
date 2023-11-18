@@ -41,7 +41,7 @@ btnLogin.addEventListener('click', () => {
 
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
-                window.location.replace('/home.php');
+                window.location.replace('/CheckToken/home.php');
               }, 2000);
             })
             .catch((error) => {

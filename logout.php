@@ -8,6 +8,6 @@
   session_destroy();
 
   // Redirige al usuario a la página de inicio de sesión
-  header("Location: /"); // Ajusta la ruta según tu estructura de archivos
+  header("Location: /CheckToken/"); // Ajusta la ruta según tu estructura de archivos
   exit();
 ?>
