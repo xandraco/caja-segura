@@ -22,11 +22,11 @@ const DataUser = () => {
                 // Acceder a los datos de sesión desde la respuesta JSON
                 loggedUser = res.USER;
                 console.log('Usuario: ', loggedUser)
+                loadUser()
             } else {
                 console.error('Error:', res.MESSAGE);
             }
         }).catch(error => console.error('Error de Fetch:', error));
-    loadUser()
 }
 
 const loadUser = () => {
