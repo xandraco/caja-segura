@@ -68,5 +68,5 @@ const activaAlerta = mensaje => {
     setTimeout(() => {
         alerta[0].classList.remove('show')
         alerta[0].classList.add('hide')
-    }, 30000)
+    }, 30000000)
 }
