@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
                 loggedUser = response.USER;
-                console.log('email:', loggedUser);
             } else {
                 console.error('Error:', response.MESSAGE);
             }
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const loadUser = () => {
     console.log(loggedUser)
-    titulo.innerHTML = loggedUser.user;
+    titulo.innerHTML = loggedUser['email'];
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -52,7 +51,7 @@ const genToken = () => {
 }
 
 const SendToken = (token) => {
-    const idUsuario = loggedUser.id;
+    const idUsuario = loggedUser['id'];
     const sendData = {
         token,
         idUsuario
