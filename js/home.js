@@ -10,6 +10,7 @@ let timer = 60;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUser()
+    CounterDisplay.textContent = timer.toString()
 })
 
 const loadUser = () => {
@@ -69,10 +70,10 @@ const SendToken = (token) => {
 }
 
 const updateCountDown = () => {
+    timer--;    
     CounterDisplay.textContent = timer.toString()
     if (timer <= 0){
         genToken();
         timer = 60;
     }
-    timer--;
 }
