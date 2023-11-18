@@ -7,7 +7,7 @@ $dataPost = file_get_contents('php://input');
 $body = json_decode($dataPost, true);
 
 $token = $body['token'];
-$idUsuario = $body['idUsuario'];
+$idUsuario = $body['idUsuario'];  
 $tokenhash = password_hash($token, PASSWORD_BCRYPT);
 
 $queryCheckExisting = "SELECT * FROM tokenActual WHERE id = :idUsuario";

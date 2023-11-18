@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const loadUser = () => {
-    const.log(loggedUser)
+    console.log(loggedUser)
     titulo.innerHTML = loggedUser.user;
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
