@@ -72,7 +72,7 @@ const SendToken = (token) => {
 const updateCountDown = (nextUpdate) => {
     const now = new Date()
     const difference = nextUpdate - now
-
+    console.log(difference)
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
@@ -82,7 +82,9 @@ const updateCountDown = (nextUpdate) => {
     if (difference < 0) {
         clearInterval(CountDown); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
-        CountDown = setInterval(updateCountDown, 1000); // Reiniciar el contador
+        const nowReset = new Date();
+        const nextUpdateReset = new Date(nowReset.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+        CountDown = setInterval(updateCountDown(nextUpdateReset), 1000); // Reiniciar el contador
         nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
     }
 }
