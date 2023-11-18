@@ -17,22 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
 const DataUser = () => {
     fetch('./Backend/Files/session.php')
     .then(async response => {
-        if (!response.ok) {
-            throw new Error('Error de red o servidor');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Manejar la respuesta del servidor
-        if (data.STATUS === 'SUCCESS') {
+        const res = await response.json();
+        if (res.STATUS === 'SUCCESS') {
             // Acceder a los datos de sesión desde la respuesta JSON
-            loggedUser = data.USER;
+            loggedUser = res.USER;
             console.log(loggedUser)
         } else {
-            console.error('Error:', data.MESSAGE);
+            console.error('Error:', res.MESSAGE);
         }
-    })
-    .catch(error => console.error('Error de Fetch:', error));
+    }).catch(error => console.error('Error de Fetch:', error));
     loadUser()
 }
 
