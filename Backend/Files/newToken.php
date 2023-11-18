@@ -27,7 +27,7 @@ $queryInsertToken = "INSERT INTO tokenActual VALUES ('$idUsuario', '$tokenhash',
 $resultadoInsert = mysqli_query($conn, $queryInsertToken);
 
 if ($resultadoInsert) {
-  echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token almacenado en la base de datos']);
+  echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => $tokenhash]);
 } else {
   echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
 }
