@@ -33,7 +33,8 @@ const loadUser = () => {
 
                 genToken(); // Generar token al inicio
                 const now = new Date();
-                CountDown = setInterval(updateCountDown(now), 1000);
+                const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+                CountDown = setInterval(updateCountDown(nextUpdate), 1000);
             })
     }
 }
@@ -68,9 +69,8 @@ const SendToken = (token) => {
         });
 }
 
-const updateCountDown = (now) => {
-
-    const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+const updateCountDown = (nextUpdate) => {
+    const now = new Date()
     const difference = nextUpdate - now
 
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
