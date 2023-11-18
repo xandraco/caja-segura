@@ -37,7 +37,7 @@ const DataUser = () => {
 }
 
 const loadUser = () => {    
-    titulo.innerHTML = loggedUser.user;
+    titulo.innerHTML = loggedUser['email'];
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -55,7 +55,7 @@ const genToken = () => {
 }
 
 const SendToken = (token) => {
-    const idUsuario = loggedUser.id;
+    const idUsuario = loggedUser['id'];
     const sendData = {
         token,
         idUsuario
