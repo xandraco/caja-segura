@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'GET',
         url: './Backend/Files/session.php',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
             // Manejar la respuesta del servidor
             if (response.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error:', response.MESSAGE);
             }
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('Error de AJAX:', status, error);
         }
     });
@@ -33,11 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const loadUser = () => {
-                titulo.innerHTML = loggedUser.user;
-                genToken(); // Generar token al inicio
-                countDown = setInterval(updateCountDown, 1000);
-        }
-    
+    const.log(loggedUser)
+    titulo.innerHTML = loggedUser.user;
+    genToken(); // Generar token al inicio
+    countDown = setInterval(updateCountDown, 1000);
+}
+
 const genToken = () => {
     // Genera un token aleatorio de 6 dígitos
     const token = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
@@ -62,7 +63,7 @@ const SendToken = (token) => {
         body: JSON.stringify(sendData),
         headers: { 'Content-Type': 'application/json' }
     })
-        .then( async(response) => await response.json())
+        .then(async (response) => await response.json())
         .catch(error => {
             console.error('Error al enviar el token al PHP:', error);
         });
@@ -71,7 +72,7 @@ const SendToken = (token) => {
 const updateCountDown = () => {
     timer--;
     CounterDisplay.textContent = timer.toString()
-    if (timer <= 1){
+    if (timer <= 1) {
         genToken();
         timer = 60;
     }
