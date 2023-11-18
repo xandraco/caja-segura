@@ -1,4 +1,6 @@
 <?php
+  session_start();
+
   include("../config/conexion.php");
   $conn = conectar();
   $dataPost = file_get_contents('php://input');
@@ -8,12 +10,19 @@
     $email = $body['email'];
     $password = $body['password'];
 
-    $queryuser = "SELECT * FROM users WHERE email = '$email'";
-    $validuser = mysqli_query($conn, $queryuser);
+    // Buscamos el usuario dentro de la base de datos
+    $queryuser = "SELECT * FROM users WHERE email = :email";
+    $stmt = $conn -> prepare ($queryuser);
+    $stmt -> bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt -> execute();
+    $validuser = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-    if($validuser -> num_rows > 0) {
-      $usuario = $validuser -> fetch_assoc();
+    if (count($validuser) > 0) {
+      $usuario = $validuser[0];
       if (password_verify($password, $usuario['password'])) {
+        // Almacenamos la información de la sesión
+        $_SESSION['usuario'] = $usuario;
+
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success', 'USUARIO' => $usuario]);
       } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
