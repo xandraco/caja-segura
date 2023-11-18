@@ -22,8 +22,6 @@ const DataUser = () => {
             // Acceder a los datos de sesión desde la respuesta JSON
             loggedUser = res.USER;
             console.log('Usuario: ', loggedUser)
-            console.log('Usuario p1: ', loggedUser.id, loggedUser.user)
-            console.log('Usuario p2: ', loggedUser['id'], loggedUser['user'])
         } else {
             console.error('Error:', res.MESSAGE);
         }
@@ -32,7 +30,7 @@ const DataUser = () => {
 }
 
 const loadUser = () => {    
-    titulo.innerHTML = loggedUser['email'];
+    titulo.innerHTML = loggedUser.id;
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -50,7 +48,8 @@ const genToken = () => {
 }
 
 const SendToken = (token) => {
-    const idUsuario = loggedUser['id'];
+    const idUsuario = loggedUser.id;
+    console.log(idUsuario)
     const sendData = {
         token,
         idUsuario
