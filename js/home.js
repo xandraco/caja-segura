@@ -21,7 +21,7 @@ const DataUser = () => {
         if (res.STATUS === 'SUCCESS') {
             // Acceder a los datos de sesión desde la respuesta JSON
             loggedUser = res.USER;
-            console.log(loggedUser)
+            console.log('Usuario', loggedUser)
         } else {
             console.error('Error:', res.MESSAGE);
         }
