@@ -3,7 +3,7 @@
 
   // Verifica si no hay una sesión activa
   if (!isset($_SESSION['usuario'])) {
-    header('Location: /CheckToken/'); // Cambia la ruta según tu estructura de archivos
+    header('Location: /'); // Cambia la ruta según tu estructura de archivos
     exit();
   }
 ?>
