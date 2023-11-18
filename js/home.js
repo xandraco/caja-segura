@@ -12,7 +12,7 @@ let timer = 60;
 document.addEventListener('DOMContentLoaded', () => {
     $.ajax({
         type: 'GET',
-        url: './Backend/files/session.php',
+        url: './Backend/Files/session.php',
         dataType: 'json',
         success: function(response) {
             // Manejar la respuesta del servidor
