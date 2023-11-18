@@ -30,7 +30,7 @@ const DataUser = () => {
 }
 
 const loadUser = () => {
-    titulo.innerHTML = loggedUser.id;
+    titulo.innerHTML = loggedUser.user;
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -53,6 +53,7 @@ const SendToken = (token) => {
         token,
         idUsuario
     };
+    console.log(sendData)
     fetch('./Backend/Files/newToken.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
