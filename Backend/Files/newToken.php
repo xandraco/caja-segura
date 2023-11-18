@@ -41,3 +41,4 @@ if ($stmtInsert) {
     echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
 }
 ?>
+
