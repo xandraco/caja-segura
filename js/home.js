@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const DataUser = () => {
     fetch('./Backend/Files/session.php', {method: 'GET'})
-        .then(async response => {
+        .then(async (response) => {
             const res = await response.json();
             if (res.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
@@ -49,12 +49,10 @@ const genToken = () => {
 
 const SendToken = (token) => {
     const idUsuario = loggedUser.id;
-    console.log(idUsuario)
     const sendData = {
         token,
         idUsuario
     };
-    console.log(sendData)
     fetch('./Backend/Files/newToken.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
