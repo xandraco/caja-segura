@@ -34,7 +34,7 @@ const loadUser = () => {
                 genToken(); // Generar token al inicio
                 const now = new Date();
                 const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
-                CountDown = setInterval(updateCountDown(nextUpdate), 1000);
+                CountDown = setInterval(updateCountDown(nextUpdate), 10000);
             })
     }
 }
