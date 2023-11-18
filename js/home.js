@@ -32,9 +32,10 @@ const loadUser = () => {
                 console.log('response => ', loggedUser)
 
                 genToken(); // Generar token al inicio
-                const now = new Date();
-                const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
-                CountDown = setInterval(updateCountDown(nextUpdate), 10000);
+                const Fnow = new Date();
+                const FnextUpdate = new Date(Fnow.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
+                CountDown = setInterval(updateCountDown(FnextUpdate), 1000);
+                console.log(Fnow)
             })
     }
 }

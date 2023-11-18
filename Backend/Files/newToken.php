@@ -5,6 +5,7 @@ $dataPost = file_get_contents('php://input');
 $body = json_decode($dataPost, true);
 $token = $body['token'];
 $idUsuario = $body['idUsuario'];
+$tokenhash = password_hash($token, PASSWORD_DEFAULT);
 
 $queryCheckExisting = "SELECT * FROM tokenActual WHERE id = '$idUsuario'";
 $resultadoCheck = mysqli_query($conn, $queryCheckExisting);
@@ -22,7 +23,7 @@ if ($resultadoCheck && mysqli_num_rows($resultadoCheck) > 0) {
 }
 
 
-$queryInsertToken = "INSERT INTO tokenActual VALUES ('$idUsuario', '$token', '$idUsuario')";
+$queryInsertToken = "INSERT INTO tokenActual VALUES ('$idUsuario', '$tokenhash', '$idUsuario')";
 $resultadoInsert = mysqli_query($conn, $queryInsertToken);
 
 if ($resultadoInsert) {
