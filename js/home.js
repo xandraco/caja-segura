@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     CounterDisplay.textContent = timer.toString()
 })
 
-const loadUser = () => {
-    console.log(loggedUser)
+const loadUser = () => {    
     titulo.innerHTML = loggedUser['email'];
+    console.log(loggedUser.id, loggedUser.user)
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
