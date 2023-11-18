@@ -67,7 +67,7 @@ const SendToken = (token) => {
         });
 }
 
-const updateCountDown = (nextUpdate) => {
+const updateCountDown = () => {
     const now = new Date();
     const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
     const difference = nextUpdate - now;
