@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: 'GET',
         url: './Backend/Files/session.php',
         dataType: 'json',
-        success: function (response) {
+        success: function await (response) {
             // Manejar la respuesta del servidor
             if (response.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
