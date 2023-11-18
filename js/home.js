@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const loadUser = () => {
     const url = window.location.search
     const params = new URLSearchParams(url)
-    const email = params.get('email')
+    const email = params.get('email') 
 
     if (email) {
         const sendData = {
