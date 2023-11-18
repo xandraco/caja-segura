@@ -10,30 +10,33 @@ const CounterDisplay = document.getElementById('counter');
 let timer = 60;
 
 document.addEventListener('DOMContentLoaded', () => {
-    $.ajax({
-        type: 'GET',
-        url: './Backend/Files/session.php',
-        dataType: 'json',
-        success: function await (response) {
-            // Manejar la respuesta del servidor
-            if (response.STATUS === 'SUCCESS') {
-                // Acceder a los datos de sesión desde la respuesta JSON
-                loggedUser = response.USER;
-            } else {
-                console.error('Error:', response.MESSAGE);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error de AJAX:', status, error);
-        }
-    });
-    loadUser()
+    DataUser()
     CounterDisplay.textContent = timer.toString()
 })
 
+const DataUser = () => {
+    fetch('./Backend/Files/session.php')
+    .then(async response => {
+        if (!response.ok) {
+            throw new Error('Error de red o servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Manejar la respuesta del servidor
+        if (data.STATUS === 'SUCCESS') {
+            // Acceder a los datos de sesión desde la respuesta JSON
+            loggedUser = data.USER;
+        } else {
+            console.error('Error:', data.MESSAGE);
+        }
+    })
+    .catch(error => console.error('Error de Fetch:', error));
+    loadUser()
+}
+
 const loadUser = () => {    
-    titulo.innerHTML = loggedUser['email'];
-    console.log(loggedUser.id, loggedUser.user)
+    titulo.innerHTML = loggedUser.user;
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -51,7 +54,7 @@ const genToken = () => {
 }
 
 const SendToken = (token) => {
-    const idUsuario = loggedUser['id'];
+    const idUsuario = loggedUser.id;
     const sendData = {
         token,
         idUsuario
