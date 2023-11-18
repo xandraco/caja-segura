@@ -42,7 +42,7 @@ btnLogin.addEventListener('click', () => {
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
                 window.location.replace('/CheckToken/home.php');
-              }, 2000);
+              }, 200000);
             })
             .catch((error) => {
               console.log('Error al almacenar la sesión: ', error);
@@ -68,5 +68,5 @@ const activaAlerta = mensaje => {
     setTimeout(() => {
         alerta[0].classList.remove('show')
         alerta[0].classList.add('hide')
-    }, 30000000)
+    }, 3000)
 }
