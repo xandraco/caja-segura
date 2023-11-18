@@ -133,3 +133,38 @@ footer {
     }
     .row.content {height: auto;} 
 }
+
+/* ... (tu CSS previo) */
+
+.card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .circle-token {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .circle-token span {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  #counter {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
