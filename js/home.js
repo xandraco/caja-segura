@@ -70,16 +70,16 @@ const SendToken = (token) => {
 }
 
 const updateCountDown = (nextUpdate) => {
-    const now = new Date()
-    const difference = nextUpdate - now
+    const now = new Date();
+    const difference = nextUpdate - now;
+    console.log(difference);   
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
     const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     CounterDisplay.textContent = display;
 
-    if (difference < 1000) {   
-        console.log(difference)
+    if (difference < 1000) {    
         clearInterval(CountDown); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
         const nowReset = new Date();
