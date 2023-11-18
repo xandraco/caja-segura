@@ -34,8 +34,6 @@ const loadUser = () => {
                 genToken(); // Generar token al inicio
                 const now = new Date();
                 const nextUpdate = new Date(now.getTime() + 60 * 1000); // Calcular el tiempo para la próxima actualización (1 minuto)
-                console.log(now)
-                console.log(nextUpdate)
                 CountDown = setInterval(updateCountDown(nextUpdate), 1000);
             })
     }
@@ -79,9 +77,11 @@ const updateCountDown = (nextUpdate) => {
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
     const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    console.log(display)
+    
     CounterDisplay.textContent = display;
 
-    if (difference < 0) {   
+    if (difference < 1000) {   
         clearInterval(CountDown); // Detener el contador si ha pasado el tiempo límite
         genToken(); // Generar un nuevo token
         const nowReset = new Date();
