@@ -10,7 +10,7 @@ $token = $body['token'];
 $idUsuario = $body['idUsuario'];  
 $tokenhash = password_hash($token, PASSWORD_BCRYPT);
 
-$queryCheckExisting = "SELECT * FROM tokenActual WHERE id = :idUsuario";
+$queryCheckExisting = "SELECT * FROM tokenActual WHERE ta_id_user = :idUsuario";
 $stmt = $conn->prepare($queryCheckExisting);
 $stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 $stmt->execute();
@@ -18,7 +18,7 @@ $validTokens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($validTokens) > 0) {
     // Si existe un registro para este usuario, elimínalo
-    $queryDeleteExisting = "DELETE FROM tokenActual WHERE id = :idUsuario";
+    $queryDeleteExisting = "DELETE FROM tokenActual WHERE ta_id_user = :idUsuario";
     $stmtDelete = $conn->prepare($queryDeleteExisting);
     $stmtDelete->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
     $stmtDelete->execute();
@@ -29,7 +29,7 @@ if (count($validTokens) > 0) {
     }
 }
 
-$queryInsertToken = "INSERT INTO tokenActual (id, token, idUsuario) VALUES (:idUsuario, :tokenhash, :idUsuario)";
+$queryInsertToken = "INSERT INTO tokenActual (id, token, ta_id_user) VALUES (:idUsuario, :tokenhash, :idUsuario)";
 $stmtInsert = $conn->prepare($queryInsertToken);
 $stmtInsert->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
 $stmtInsert->bindParam(":tokenhash", $tokenhash, PDO::PARAM_STR);
