@@ -49,7 +49,7 @@
           <p class="card-text"><span id="tokenDisplay"></span></p>
         </div>
       </div><div class="m-2">
-      <a href="/CheckToken/logout.php">Cerrar Sesión</a>
+      <a href="./Backend/Files/logout.php">Cerrar Sesión</a>
       </div>
     </div>
   </div>
