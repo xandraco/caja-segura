@@ -21,7 +21,6 @@ const DataUser = () => {
             if (res.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
                 loggedUser = res.USER;
-                console.log('Usuario: ', loggedUser)
                 loadUser()
             } else {
                 console.error('Error:', res.MESSAGE);
@@ -53,7 +52,6 @@ const SendToken = (token) => {
         token,
         idUsuario
     };
-    console.log(sendData)
     fetch('./Backend/Files/newToken.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
