@@ -23,7 +23,6 @@ $user = $_SESSION['usuario'];
 </head>
 
 <body>
-
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-3 sidenav">
