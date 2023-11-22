@@ -1,40 +1,43 @@
 <?php
-  session_start();
+session_start();
 
-  include("../config/conexion.php");
-  $conn = conectar();
-  $dataPost = file_get_contents('php://input');
-  $body = json_decode($dataPost, true);
+include("../config/conexion.php");
+$conn = conectar();
+$dataPost = file_get_contents('php://input');
+$body = json_decode($dataPost, true);
 
-  if ($body !== null) {
-    $email = $body['email'];
-    $password = $body['password'];
+$token = $body['token'];
+$idUsuario = $body['idUsuario'];  
+$tokenhash = password_hash($token, PASSWORD_BCRYPT);
 
-    // Buscamos el usuario dentro de la base de datos
-    $queryuser = "SELECT * FROM users WHERE email = :email";
-    $stmt = $conn -> prepare ($queryuser);
-    $stmt -> bindParam(":email", $email, PDO::PARAM_STR);
-    $stmt -> execute();
-    $validuser = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+$queryCheckExisting = "SELECT * FROM tokenActual WHERE ta_id_user = :idUsuario";
+$stmt = $conn->prepare($queryCheckExisting);
+$stmt->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+$stmt->execute();
+$validTokens = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if (count($validuser) > 0) {
-      $usuario = $validuser[0];
-      if (password_verify($password, $usuario['password'])) {
-        // Almacenamos la información de la sesión
-        $_SESSION['usuario'] = $usuario;
+if (count($validTokens) > 0) {
+    // Si existe un registro para este usuario, elimínalo
+    $queryDeleteExisting = "DELETE FROM tokenActual WHERE ta_id_user = :idUsuario";
+    $stmtDelete = $conn->prepare($queryDeleteExisting);
+    $stmtDelete->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+    $stmtDelete->execute();
 
-        echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'success']);
-      } else {
-        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Contraseña incorrecta']);
-      }
-      die;
-    } else {
-      echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'No se encontro el usuario']);
+    if (!$stmtDelete) {
+        echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al eliminar el token existente']);
+        exit();
     }
+}
 
-    // echo $email . ' ' . $password;
-  } else {
-    http_response_code(400);
-    echo 'Invalid Data';
-  }
+$queryInsertToken = "INSERT INTO tokenActual (id, token, ta_id_user) VALUES (:idUsuario, :tokenhash, :idUsuario)";
+$stmtInsert = $conn->prepare($queryInsertToken);
+$stmtInsert->bindParam(":idUsuario", $idUsuario, PDO::PARAM_INT);
+$stmtInsert->bindParam(":tokenhash", $tokenhash, PDO::PARAM_STR);
+$stmtInsert->execute();
+
+if ($stmtInsert) {
+    echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token almacenado en la base de datos']);
+} else {
+    echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Error al almacenar el token']);
+}
 ?>
