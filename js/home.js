@@ -68,7 +68,7 @@ const SendToken = (token) => {
 const updateCountDown = () => {
     timer--;
     CounterDisplay.textContent = timer.toString()
-    if (timer <= 1) {
+    if (timer <= 0) {
         genToken();
         timer = 60;
     }
