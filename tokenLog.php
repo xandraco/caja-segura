@@ -23,6 +23,7 @@ $user = $_SESSION['usuario'];
 </head>
 
 <body>
+
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-3 sidenav">
@@ -40,13 +41,7 @@ $user = $_SESSION['usuario'];
       </div>
 
       <div class="col-sm-9">
-        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-          <div class="card-header">Token</div>
-          <div class="card-body">
-            <h5 class="card-title"><span id="counter"></span></h5>
-            <p class="card-text"><span id="tokenDisplay"></span></p>
-          </div>
-        </div>
+        
       </div>
     </div>
 
@@ -55,7 +50,6 @@ $user = $_SESSION['usuario'];
     </footer>
 
     <script src="./js/home.js"></script>
-    <script src="./js/showToken.js"></script>
 </body>
 
 </html>
