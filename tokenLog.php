@@ -6,7 +6,13 @@ if (!isset($_SESSION['usuario'])) {
   header('Location: /'); // Cambia la ruta según tu estructura de archivos
   exit();
 }
+
 $user = $_SESSION['usuario'];
+
+if ($user['admin']) {
+  header('Location: /home.php'); // Cambia la ruta según tu estructura de archivos
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +47,7 @@ $user = $_SESSION['usuario'];
       </div>
 
       <div class="col-sm-9">
-        
+
       </div>
     </div>
 
