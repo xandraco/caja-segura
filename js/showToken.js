@@ -1,5 +1,6 @@
 let loggedToken = {}
 // Contador y token:
+
 let tokenValue = ''; // Variable para almacenar el valor del token
 const tokenDisplay = document.getElementById('tokenDisplay');
 const CounterDisplay = document.getElementById('counter');
@@ -11,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const DataUserToken = () => {
-    fetch('./Backend/Files/session.php', {method: 'GET'})
+    fetch('./Backend/Files/session.php', { method: 'GET' })
         .then(async (response) => {
             const res = await response.json();
             if (res.STATUS === 'SUCCESS') {
                 // Acceder a los datos de sesión desde la respuesta JSON
-                loggedToken = res.USER;
-                loadUserToken()
+                loggedUser = res.USER;
+                loadToken()
             } else {
                 console.error('Error:', res.MESSAGE);
             }
         }).catch(error => console.error('Error de Fetch:', error));
 }
 
-const loadUserToken = () => {
+const loadToken = () => {
     genToken(); // Generar token al inicio
     countDown = setInterval(updateCountDown, 1000);
 }
@@ -42,7 +43,7 @@ const genToken = () => {
 }
 
 const SendToken = (token) => {
-    const idUsuario = loggedToken.id;
+    const idUsuario = loggedUser.id;
     const sendData = {
         token,
         idUsuario

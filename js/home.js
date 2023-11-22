@@ -1,11 +1,9 @@
 let loggedUser = {}
 
 const titulo = document.getElementById('userBlog')
-const mainContent = document.getElementById('mainContent');
 
 document.addEventListener('DOMContentLoaded', () => {
     DataUser()
-    fetchComponent('showToken');
 })
 
 const DataUser = () => {
@@ -24,17 +22,4 @@ const DataUser = () => {
 
 const loadUser = () => {
     titulo.innerHTML = loggedUser.user;
-}
-
-function changeContent(component) {
-    fetchComponent(component);
-}
-
-function fetchComponent(component) {
-    fetch(`./components/${component}.php`)
-        .then(response => response.text())
-        .then(data => {
-            mainContent.innerHTML = data;
-        })
-        .catch(error => console.error('Error al cargar el componente:', error));
 }
