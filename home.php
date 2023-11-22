@@ -35,15 +35,15 @@ $user = $_SESSION['usuario'];
             <li><a href="#" onclick="changeContent('showTokenLog')">Bitácora de tokens</a></li>
           <?php } ?>
         </ul><br>
+        <div class="m-2">
+          <a href="./Backend/Files/logout.php">Cerrar Sesión</a>
+        </div>
       </div>
 
       <div class="col-sm-9">
         <!-- Contenido principal -->
         <div id="mainContent">
           <?php include './components/showToken.php'; ?> <!-- Componente predeterminado -->
-        </div>
-        <div class="m-2">
-          <a href="./Backend/Files/logout.php">Cerrar Sesión</a>
         </div>
       </div>
     </div>

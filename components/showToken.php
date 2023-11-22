@@ -6,3 +6,5 @@
     </div>
 </div>
 <div class="m-2">
+
+<script src="../js/showToken.js"></script>
