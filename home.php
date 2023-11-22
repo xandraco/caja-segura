@@ -3,6 +3,7 @@
 
   // Verifica si no hay una sesión activa
   if (!isset($_SESSION['usuario'])) {
+    $user = $_SESSION['usuario'];
     header('Location: /'); // Cambia la ruta según tu estructura de archivos
     exit();
   }
