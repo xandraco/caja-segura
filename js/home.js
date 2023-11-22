@@ -12,6 +12,7 @@ let timer = 60;
 document.addEventListener('DOMContentLoaded', () => {
     DataUser()
     CounterDisplay.textContent = timer.toString()
+    fetchComponent('showToken');
 })
 
 const DataUser = () => {
@@ -70,4 +71,17 @@ const updateCountDown = () => {
         genToken();
         timer = 60;
     }
+}
+
+function changeContent(component) {
+    fetchComponent(component);
+}
+
+function fetchComponent(component) {
+    fetch(`./components/${component}.php`)
+        .then(response => response.text())
+        .then(data => {
+            mainContent.innerHTML = data;
+        })
+        .catch(error => console.error('Error al cargar el componente:', error));
 }
