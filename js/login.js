@@ -6,7 +6,7 @@ btnLogin.addEventListener('click', () => {
   const password = document.getElementById('password');
 
   if (email.value.trim() === '' || password.value.trim() === '') {
-    activaAlerta('Los campos no pueden estar vacíos');
+    activaAlertaError('Los campos no pueden estar vacíos');
   } else {
     const sendData = {
       email: email.value,
@@ -23,9 +23,9 @@ btnLogin.addEventListener('click', () => {
       .then(async (response) => {
         const respuesta = await response.json();
         if (respuesta.MESSAGE === 'No se encontro el usuario') {
-          activaAlerta('El usuario no existe');
+          activaAlertaError('El usuario no existe');
         } else if (respuesta.MESSAGE === 'Contraseña incorrecta') {
-          activaAlerta('Contraseña incorrecta');
+          activaAlertaError('Contraseña incorrecta');
         } else if (respuesta.MESSAGE === 'success') {
           // Almacena información del usuario en la sesión del servidor
           fetch('./Backend/Files/session.php', {
@@ -37,7 +37,7 @@ btnLogin.addEventListener('click', () => {
           })
             .then(() => {
               // Indica al usuario que el inicio de sesión fue exitoso
-              activaAlerta('Inicio de sesión exitoso');
+              activaAlertaOk('Inicio de sesión exitoso');
 
               // Redirige al usuario después de mostrar el mensaje
               setTimeout(() => {
@@ -46,20 +46,20 @@ btnLogin.addEventListener('click', () => {
             })
             .catch((error) => {
               console.log('Error al almacenar la sesión: ', error);
-              activaAlerta('Algo ha salido mal');
+              activaAlertaError('Algo ha salido mal');
             });
         } else {
-          activaAlerta('Algo ha salido mal');
+          activaAlertaError('Algo ha salido mal');
         }
       })
       .catch((error) => {
         console.log('Error en la solicitud: ', error);
-        activaAlerta('Algo ha salido mal');
+        activaAlertaError('Algo ha salido mal');
       });
   }
 });
 
-const activaAlerta = mensaje => {
+const activaAlertaError = mensaje => {
     const alerta =document.getElementsByClassName('alert')
     console.log('alerta', alerta)
     alerta[0].innerHTML = mensaje
@@ -70,3 +70,20 @@ const activaAlerta = mensaje => {
         alerta[0].classList.add('hide')
     }, 3000)
 }
+
+const activaAlertaOk = mensaje => {
+  const alerta =document.getElementsByClassName('alert')
+  console.log('alerta', alerta)
+  alerta[0].innerHTML = mensaje
+  alerta[0].classList.remove('hide')
+  alerta[0].classList.add('show')
+  alerta[0].classList.remove('alert-danger')
+  alerta[0].classList.add('alert-success')
+  setTimeout(() => {
+      alerta[0].classList.remove('show')
+      alerta[0].classList.add('hide')
+      alerta[0].classList.remove('alert-success')
+      alerta[0].classList.add('alert-danger')
+  }, 3000)
+}
+
