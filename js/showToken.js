@@ -4,7 +4,9 @@ let loggedToken = {}
 let tokenValue = ''; // Variable para almacenar el valor del token
 const tokenDisplay = document.getElementById('tokenDisplay');
 const CounterDisplay = document.getElementById('counter');
+const TimeBar = document.getElementById('timeBar');
 let timer = 60;
+let remainingSeconds;
 
 document.addEventListener('DOMContentLoaded', () => {
     DataUserToken()
@@ -62,6 +64,7 @@ const SendToken = (token) => {
 const updateCountDown = () => {
     timer--;
     CounterDisplay.textContent = timer.toString()
+    TimeBar.style.width = (timer*100/60) + "%"
     if (timer <= 0) {
         genToken();
         timer = 60;
