@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $user = $_SESSION['usuario'];
 
-if ($user['admin']) {
+if ($user['admin'] == 0) {
   header('Location: /home.php'); // Cambia la ruta según tu estructura de archivos
   exit();
 }
@@ -47,7 +47,22 @@ if ($user['admin']) {
       </div>
 
       <div class="col-sm-9">
-
+        <!-- Contenedor para la tabla de usuarios -->
+        <h2>Administrar Usuarios</h2>
+        <table id="TablaUsuarios">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Privilegios</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="user-table">
+            <!-- Aquí se agregarán dinámicamente los usuarios -->
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -55,7 +70,24 @@ if ($user['admin']) {
       <p>Footer Text</p>
     </footer>
 
+    <template id="DataUsers">
+      <!-- Plantilla para mostrar datos de usuario -->
+      <tr>
+        <th></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <!-- Botones para editar y borrar -->
+          <a href="">Editar</a>
+          <a href="">Borrar</a>
+        </td>
+      </tr>
+    </template>
+
     <script src="./js/home.js"></script>
+    <script src="./js/adminUsers.js"></script>
+  </div>
 </body>
 
 </html>
