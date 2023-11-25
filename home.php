@@ -52,7 +52,6 @@ $user = $_SESSION['usuario'];
             aria-valuemin="0" 
             aria-valuemax="100"
             aria-value-now = "50"
-            data-width = "75  "
           ></div>
         </div>
       </div>
