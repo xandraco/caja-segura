@@ -10,7 +10,7 @@ btnLogin.addEventListener('click', () => {
   } else {
     const sendData = {
       email: email.value,
-      password: password.value,
+      password: password.value
     };
 
     fetch('./Backend/Files/login.php', {
