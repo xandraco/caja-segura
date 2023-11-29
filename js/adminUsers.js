@@ -5,11 +5,16 @@ const userTemplate = document.getElementById('DataUsers').content; // Plantilla 
 const fragment = document.createDocumentFragment()
 
 updateBtn = document.getElementById('btnUpdate')
+addBtn = document.getElementById('btnAdd')
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
 
     document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('AddUsuarioBtn')) {
+            $('editarUsuarioModal').modal('show');
+        }
+
         if (event.target.classList.contains('editarUsuarioBtn')) {
             const idUsuario = event.target.getAttribute('data-user-id');
             const modal = document.getElementById('editarUsuarioModal');
@@ -18,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
             idUsuarioInput.value = idUsuario;
             $('editarUsuarioModal').modal('show');
         }
+    });
+
+    $('#AddUsuarioModal').on('hidden.bs.modal', function () {
+        document.getElementById('AddUsuarioForm').reset();
     });
 
     $('#editarUsuarioModal').on('hidden.bs.modal', function () {
@@ -54,6 +63,95 @@ const loadUsers = () => {
         });
 };
 
+addBtn.addEventListener('click', () => {
+    const idUsuario = document.getElementById('idUsuarioUpdate')
+    const user = document.getElementById('userUpdate');
+    const password = document.getElementById('passwordUpdate');
+    const adminFalse = document.getElementById('adminUpdateFalse').checked;
+    let admin = 0
+
+    if (adminFalse){
+        admin = 0
+    } else {
+        admin = 1
+    }
+
+    const sendData = {
+        idUsuario: idUsuario.value,
+        user: user.value,
+        password: password.value,
+        admin: admin
+    };
+
+    fetch('./Backend/Files/updateUser.php', {
+        method: 'POST',
+        body: JSON.stringify(sendData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(async (response) => {
+            const respuesta = await response.json();
+            if (respuesta.MESSAGE === '1') {
+                activaAlertaOk('Todo actualizado');
+            } else if (respuesta.MESSAGE === '2') {
+                activaAlertaOk('Usuario actualizado');
+            } else if (respuesta.MESSAGE === '3') {
+                activaAlertaOk('Privilegios Actualizados')
+            } else {
+                activaAlertaError('Algo ha salido mal');
+            }
+        })
+        .catch((error) => {
+            console.log('Error en la solicitud: ', error);
+            activaAlertaError('Algo ha salido mal');
+        });
+})
+
+updateBtn.addEventListener('click', () => {
+    const idUsuario = document.getElementById('idUsuarioUpdate')
+    const user = document.getElementById('userUpdate');
+    const password = document.getElementById('passwordUpdate');
+    const adminFalse = document.getElementById('adminUpdateFalse').checked;
+    let admin = 0
+
+    if (adminFalse){
+        admin = 0
+    } else {
+        admin = 1
+    }
+
+    const sendData = {
+        idUsuario: idUsuario.value,
+        user: user.value,
+        password: password.value,
+        admin: admin
+    };
+
+    fetch('./Backend/Files/updateUser.php', {
+        method: 'POST',
+        body: JSON.stringify(sendData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(async (response) => {
+            const respuesta = await response.json();
+            if (respuesta.MESSAGE === '1') {
+                activaAlertaOk('Todo actualizado');
+            } else if (respuesta.MESSAGE === '2') {
+                activaAlertaOk('Usuario actualizado');
+            } else if (respuesta.MESSAGE === '3') {
+                activaAlertaOk('Privilegios Actualizados')
+            } else {
+                activaAlertaError('Algo ha salido mal');
+            }
+        })
+        .catch((error) => {
+            console.log('Error en la solicitud: ', error);
+            activaAlertaError('Algo ha salido mal');
+        });
+});
 
 updateBtn.addEventListener('click', () => {
     const idUsuario = document.getElementById('idUsuarioUpdate')
