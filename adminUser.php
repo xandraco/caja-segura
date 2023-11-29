@@ -56,9 +56,9 @@ if ($user['admin'] == 0) {
         <table id="TablaUsuarios">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Email</th>
+              <th>ID Token</th>
+              <th>Persona que lo uso</th>
+              <th>token</th>
               <th>Privilegios</th>
               <th>Acciones</th>
             </tr>
@@ -150,15 +150,6 @@ if ($user['admin'] == 0) {
             </form>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="alert alert-dismissible hide fade alert-danger d-flex align-items-center mt-3" role="alert">
-      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
-        <use xlink:href="#exclamation-triangle-fill" />
-      </svg>
-      <div>
-        Se deben llenar todos los campos
       </div>
     </div>
 

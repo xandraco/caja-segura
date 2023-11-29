@@ -155,3 +155,7 @@ footer {
     font-size: calc(1.625rem + 15vw) !important;
     font-weight: 600 !important;
 }
+
+.input-group-append {
+    cursor: pointer;
+  }

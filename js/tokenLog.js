@@ -1,14 +1,20 @@
 let usersArray = {};
 
-const usersContainer = document.getElementById('TablaUsuarios'); // Contenedor donde mostrar los usuarios
-const userTemplate = document.getElementById('DataUsers').content; // Plantilla HTML
+const usersContainer = document.getElementById('TokenTable'); // Contenedor donde mostrar los usuarios
+const userTemplate = document.getElementById('DataToken').content; // Plantilla HTML
 const fragment = document.createDocumentFragment()
 
 updateBtn = document.getElementById('btnUpdate')
-addBtn = document.getElementById('btnAddUser')
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
+
+    $(function () {
+        $('#dateInit').datepicker({ uiLibrary: 'bootstrap5' });
+    });
+    $(function () {
+        $('#dateEnd').datepicker({ uiLibrary: 'bootstrap5' });
+    });
 
     document.addEventListener('click', function (event) {
         if (event.target.classList.contains('AddUsuarioBtn')) {
