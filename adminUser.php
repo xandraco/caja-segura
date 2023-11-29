@@ -67,7 +67,7 @@ if ($user['admin'] == 0) {
             <!-- Aquí se agregarán dinámicamente los usuarios -->
           </tbody>
         </table>
-        <button type="submit" id='btnAdd' class="btn btn-primary" class="AddUsuarioBtn" data-toggle="modal" data-target="#AddUsuarioModal">Agregar Usuario</button>
+        <button type="submit" id='btnAdd' class="btn btn-primary" class="AddUsuarioBtn" data-bs-toggle="modal" data-bs-target="#AddUsuarioModal">Agregar Usuario</button>
       </div>
     </div>
 
@@ -77,10 +77,8 @@ if ($user['admin'] == 0) {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true"> &times; </span>
-            </button>
-            <h4 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h4>
+            <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <!-- Formulario para editar usuario -->
@@ -118,10 +116,8 @@ if ($user['admin'] == 0) {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true"> &times; </span>
-            </button>
-            <h4 class="modal-title" id="AddUsuarioModalLabel">Agregar Usuario</h4>
+          <h5 class="modal-title" id="AddUsuarioModalLabel">Agregar Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <!-- Formulario para Agregar usuario -->
@@ -183,7 +179,7 @@ if ($user['admin'] == 0) {
       <td></td>
       <td>
         <!-- Botones para editar y borrar -->
-        <a href="#" class="editarUsuarioBtn" data-toggle="modal" data-target="#editarUsuarioModal"
+        <a href="#" class="editarUsuarioBtn" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"
           data-user-id="">Editar</a>
         <a href="">Borrar</a>
       </td>
