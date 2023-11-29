@@ -34,25 +34,30 @@ $user = $_SESSION['usuario'];
             <li><a href="tokenLog.php">Bitácora de tokens</a></li>
           <?php } ?>
         </ul><br>
-        <div class="m-2">
-          <a href="./Backend/Files/logout.php">Cerrar Sesión</a>
+        <div class="mt-2 d-grid">
+          <a href="./Backend/Files/logout.php" class="btn btn-lg btn-secondary" role="button" id="logout-btn">Cerrar Sesión</a>
         </div>
       </div>
 
-      <div class="col-sm-9 text-center">
-        <h3>Token de la caja</h3>
-        <h4><span id="tokenDisplay"></span></h4>
-        <h4><span id="counter"></span></h4>
-        <div class="progress">
-          <div 
-            id="timeBar"
-            class="progress-bar" 
-            role="progressbar" 
-            aria-valuenow="100" 
-            aria-valuemin="0" 
-            aria-valuemax="100"
-            aria-value-now = "50"
-          ></div>
+      <div class="col-sm-9 text-center main-content">
+        <div class="container" id="token-container">
+          <h6>Ingresa el siguiente token en la caja para abrirla</h6>
+          <br><br><br>
+          <h1 class="display-1"><span id="tokenDisplay"></span></h1>
+          <br><br><br>
+          <h2><span id="counter"></span></h2>
+          <br>
+          <div class="progress">
+            <div 
+              id="timeBar"
+              class="progress-bar" 
+              role="progressbar" 
+              aria-valuenow="100" 
+              aria-valuemin="0" 
+              aria-valuemax="100"
+              aria-value-now = "50"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
