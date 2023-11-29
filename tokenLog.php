@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario'])) {
 
 $user = $_SESSION['usuario'];
 
-if ($user['admin']) {
+if ($user['admin'] == 0) {
   header('Location: /home.php'); // Cambia la ruta según tu estructura de archivos
   exit();
 }
