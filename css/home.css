@@ -1,9 +1,14 @@
+body {
+    color: white !important;
+    background-color: #32312e !important;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {height: 1500px}
 
 /* Set gray background color and 100% height */
 .sidenav {
-    background-color: #f1f1f1;
+    background-color: #484848;
     height: 100%;
 }
 
@@ -132,4 +137,21 @@ footer {
     padding: 15px;
     }
     .row.content {height: auto;} 
+
+    #token-container {
+        padding-top: 10vh !important;
+    }
+}
+
+#token-container {
+    padding-top: 10vh;
+}
+
+.main-content {
+    background-color: #32312e !important;
+}
+
+.display-1 {
+    font-size: calc(1.625rem + 15vw) !important;
+    font-weight: 600 !important;
 }
