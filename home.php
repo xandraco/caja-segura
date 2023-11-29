@@ -29,9 +29,11 @@ $user = $_SESSION['usuario'];
         <h4 id="userBlog">Cargando...</h4>
         <ul class="nav nav-pills nav-stacked">
           <?php if ($user['admin']) { ?>
-            <li><a href="home.php">Token de acceso</a></li>
-            <li><a href="adminUser.php">Administrar usuarios</a></li>
-            <li><a href="tokenLog.php">Bitácora de tokens</a></li>
+            <div class="d-grid mt-2 w-100">
+              <li><a href="home.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Token de acceso</a></li>
+              <li><a href="adminUser.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Administrar usuarios</a></li>
+              <li><a href="tokenLog.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Bitácora de tokens</a></li>
+            </div>
           <?php } ?>
         </ul><br>
         <div class="mt-2 d-grid">

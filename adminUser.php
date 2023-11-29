@@ -23,7 +23,7 @@ if ($user['admin'] == 0) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -38,14 +38,16 @@ if ($user['admin'] == 0) {
         <h4 id="userBlog">Cargando...</h4>
         <ul class="nav nav-pills nav-stacked">
           <?php if ($user['admin']) { ?>
-            <li><a href="home.php">Token de acceso</a></li>
-            <li><a href="adminUser.php">Administrar usuarios</a></li>
-            <li><a href="tokenLog.php">Bitácora de tokens</a></li>
+            <div class="d-grid mt-2 w-100">
+              <li><a href="home.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Token de acceso</a></li>
+              <li><a href="adminUser.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Administrar usuarios</a></li>
+              <li><a href="tokenLog.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Bitácora de tokens</a></li>
+            </div>
           <?php } ?>
         </ul><br>
-        <div class="m-2">
-          <a href="./Backend/Files/logout.php">Cerrar Sesión</a>
-        </div>
+        <div class="mt-2 d-grid">
+          <a href="./Backend/Files/logout.php" class="btn btn-lg btn-secondary" role="button" id="logout-btn">Cerrar Sesión</a>
+        </div>  
       </div>
 
       <div class="col-sm-9">
@@ -187,6 +189,7 @@ if ($user['admin'] == 0) {
     </tr>
   </template>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="./js/home.js"></script>
   <script src="./js/adminUsers.js"></script>
 
