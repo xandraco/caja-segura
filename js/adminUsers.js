@@ -5,7 +5,7 @@ const userTemplate = document.getElementById('DataUsers').content; // Plantilla 
 const fragment = document.createDocumentFragment()
 
 updateBtn = document.getElementById('btnUpdate')
-addBtn = document.getElementById('btnAdd')
+addBtn = document.getElementById('btnAddUser')
 
 document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
@@ -64,18 +64,58 @@ const loadUsers = () => {
 };
 
 addBtn.addEventListener('click', () => {
+    const email = document.getElementById('EmailAdd')
+    const user = document.getElementById('userAdd');
+    const password = document.getElementById('passwordAdd');
+    const adminFalse = document.getElementById('adminAddFalse').checked;
+    let admin = 0
+
+    if (!adminFalse) {
+        admin = 1
+    }
+
+    const sendData = {
+        email: email.value,
+        user: user.value,
+        password: password.value,
+        admin: admin
+    };
+
+    console.log(sendData)
+
+    fetch('./Backend/Files/AddUser.php', {
+        method: 'POST',
+        body: JSON.stringify(sendData),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(async (response) => {
+            const respuesta = await response.json();
+            if (respuesta.MESSAGE === '1') {
+                activaAlertaOk('Usuario Agregado');
+            } else {
+                activaAlertaError('Algo ha salido mal');
+            }
+            loadUsers();
+        })
+        .catch((error) => {
+            console.log('Error en la solicitud: ', error);
+            activaAlertaError('Algo ha salido mal');
+        });
+});
+
+
+updateBtn.addEventListener('click', () => {
     const idUsuario = document.getElementById('idUsuarioUpdate')
     const user = document.getElementById('userUpdate');
     const password = document.getElementById('passwordUpdate');
     const adminFalse = document.getElementById('adminUpdateFalse').checked;
     let admin = 0
 
-    if (adminFalse){
-        admin = 0
-    } else {
+    if (!adminFalse) {
         admin = 1
     }
-
     const sendData = {
         idUsuario: idUsuario.value,
         user: user.value,
@@ -101,6 +141,8 @@ addBtn.addEventListener('click', () => {
             } else {
                 activaAlertaError('Algo ha salido mal');
             }
+            loadUsers();
+
         })
         .catch((error) => {
             console.log('Error en la solicitud: ', error);
@@ -108,96 +150,6 @@ addBtn.addEventListener('click', () => {
         });
 })
 
-updateBtn.addEventListener('click', () => {
-    const idUsuario = document.getElementById('idUsuarioUpdate')
-    const user = document.getElementById('userUpdate');
-    const password = document.getElementById('passwordUpdate');
-    const adminFalse = document.getElementById('adminUpdateFalse').checked;
-    let admin = 0
-
-    if (adminFalse){
-        admin = 0
-    } else {
-        admin = 1
-    }
-
-    const sendData = {
-        idUsuario: idUsuario.value,
-        user: user.value,
-        password: password.value,
-        admin: admin
-    };
-
-    fetch('./Backend/Files/updateUser.php', {
-        method: 'POST',
-        body: JSON.stringify(sendData),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(async (response) => {
-            const respuesta = await response.json();
-            if (respuesta.MESSAGE === '1') {
-                activaAlertaOk('Todo actualizado');
-            } else if (respuesta.MESSAGE === '2') {
-                activaAlertaOk('Usuario actualizado');
-            } else if (respuesta.MESSAGE === '3') {
-                activaAlertaOk('Privilegios Actualizados')
-            } else {
-                activaAlertaError('Algo ha salido mal');
-            }
-        })
-        .catch((error) => {
-            console.log('Error en la solicitud: ', error);
-            activaAlertaError('Algo ha salido mal');
-        });
-});
-
-updateBtn.addEventListener('click', () => {
-    const idUsuario = document.getElementById('idUsuarioUpdate')
-    const user = document.getElementById('userUpdate');
-    const password = document.getElementById('passwordUpdate');
-    const adminFalse = document.getElementById('adminUpdateFalse').checked;
-    let admin = 0
-
-    if (adminFalse){
-        admin = 0
-    } else {
-        admin = 1
-    }
-
-    const sendData = {
-        idUsuario: idUsuario.value,
-        user: user.value,
-        password: password.value,
-        admin: admin
-    };
-
-    fetch('./Backend/Files/updateUser.php', {
-        method: 'POST',
-        body: JSON.stringify(sendData),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(async (response) => {
-            const respuesta = await response.json();
-            if (respuesta.MESSAGE === '1') {
-                activaAlertaOk('Todo actualizado');
-            } else if (respuesta.MESSAGE === '2') {
-                activaAlertaOk('Usuario actualizado');
-            } else if (respuesta.MESSAGE === '3') {
-                activaAlertaOk('Privilegios Actualizados')
-            } else {
-                activaAlertaError('Algo ha salido mal');
-            }
-        })
-        .catch((error) => {
-            console.log('Error en la solicitud: ', error);
-            activaAlertaError('Algo ha salido mal');
-        });
-
-});
 
 const activaAlertaError = mensaje => {
     const alerta = document.getElementsByClassName('alert')

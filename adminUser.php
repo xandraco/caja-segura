@@ -111,6 +111,7 @@ if ($user['admin'] == 0) {
         </div>
       </div>
     </div>
+    
     <!-- Modal Agregar usuario -->
     <div class="modal fade" id="AddUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="AgregarUsuarioModalLabel"
       aria-hidden="true">
@@ -128,17 +129,17 @@ if ($user['admin'] == 0) {
               <div class="form-group">
                 <label for="EmailUsuario">Email</label>
                 <input type="text" class="form-control" id="EmailAdd"
-                  placeholder="Nombre de usuario (Dejar en blanco para no cambiar)">
+                  placeholder="Email">
               </div>
               <div class="form-group">
                 <label for="nombreUsuario">Nombre de usuario</label>
                 <input type="text" class="form-control" id="userAdd"
-                  placeholder="Nombre de usuario (Dejar en blanco para no cambiar)">
+                  placeholder="Nombre de usuario">
               </div>
               <div class="form-group">
                 <label for="contrasena">Contraseña</label>
                 <input type="password" class="form-control" id="passwordAdd"
-                  placeholder="Contraseña (Dejar en blanco para no cambiar)">
+                  placeholder="Contraseña">
               </div>
               <div class="form-group">
                 <label>Privilegios:</label>
