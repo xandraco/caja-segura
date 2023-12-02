@@ -1,7 +1,7 @@
-let usersArray = {};
+let TokensArray = {};
 
-const usersContainer = document.getElementById('TokenTable'); // Contenedor donde mostrar los usuarios
-const userTemplate = document.getElementById('DataToken').content; // Plantilla HTML
+const TokenContainer = document.getElementById('TokenTable'); // Contenedor donde mostrar los usuarios
+const TokenTemplate = document.getElementById('DataToken').content; // Plantilla HTML
 const fragment = document.createDocumentFragment()
 
 updateBtn = document.getElementById('btnUpdate')
@@ -15,51 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
     $(function () {
         $('#dateEnd').datepicker({ uiLibrary: 'bootstrap5' });
     });
-
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('AddUsuarioBtn')) {
-            $('editarUsuarioModal').modal('show');
-        }
-
-        if (event.target.classList.contains('editarUsuarioBtn')) {
-            const idUsuario = event.target.getAttribute('data-user-id');
-            const modal = document.getElementById('editarUsuarioModal');
-            const idUsuarioInput = modal.querySelector('#idUsuarioUpdate'); // Campo oculto en el formulario modal
-            // Actualizar el valor del campo oculto con el ID del usuario seleccionado
-            idUsuarioInput.value = idUsuario;
-            $('editarUsuarioModal').modal('show');
-        }
-    });
-
-    $('#AddUsuarioModal').on('hidden.bs.modal', function () {
-        document.getElementById('AddUsuarioForm').reset();
-    });
-
-    $('#editarUsuarioModal').on('hidden.bs.modal', function () {
-        document.getElementById('editarUsuarioForm').reset();
-    });
 });
 
 const loadUsers = () => {
-    fetch('./Backend/Files/getUsers.php')
+    fetch('./Backend/Files/getTokens.php')
         .then(async response => {
             const res = await response.json();
             if (res.STATUS === 'SUCCESS') {
-                usersArray = res.USERS;
-                usersArray.forEach((user) => {
-                    userTemplate.querySelector('th').textContent = user.id;
-                    userTemplate.querySelectorAll('td')[0].textContent = user.user;
-                    userTemplate.querySelectorAll('td')[1].textContent = user.email;
-                    userTemplate.querySelectorAll('td')[2].textContent = user.admin;
-                    userTemplate.querySelectorAll('a')[0].setAttribute('data-user-id', user.id);
-                    userTemplate.querySelectorAll('a')[1].href = `Backend/files/deleteUser.php?id=${user.id}`
+                TokensArray = res.TOKENS;
+                TokensArray.forEach((token) => {
+                    TokenTemplate.querySelector('th').textContent = token.id;
+                    TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
+                    TokenTemplate.querySelectorAll('td')[1].textContent = token.token;
+                    TokenTemplate.querySelectorAll('td')[2].textContent = token.useDate;
 
-
-                    const clone = userTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
+                    const clone = TokenTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
                     // Agregar fila clonada al contenedor de usuarios
                     fragment.appendChild(clone);
                 });
-                usersContainer.appendChild(fragment)
+                TokenContainer.appendChild(fragment)
             } else {
                 console.error('Error:', res.MESSAGE);
             }
@@ -69,89 +43,73 @@ const loadUsers = () => {
         });
 };
 
-addBtn.addEventListener('click', () => {
-    const email = document.getElementById('EmailAdd')
-    const user = document.getElementById('userAdd');
-    const password = document.getElementById('passwordAdd');
-    const adminFalse = document.getElementById('adminAddFalse').checked;
-    let admin = 0
-
-    if (!adminFalse) {
-        admin = 1
-    }
-
-    const sendData = {
-        email: email.value,
-        user: user.value,
-        password: password.value,
-        admin: admin
-    };
-
-    console.log(sendData)
-
-    fetch('./Backend/Files/AddUser.php', {
-        method: 'POST',
-        body: JSON.stringify(sendData),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(async (response) => {
-            const respuesta = await response.json();
-            if (respuesta.MESSAGE === '1') {
-                activaAlertaOk('Usuario Agregado');
-            } else {
-                activaAlertaError('Algo ha salido mal');
-            }
-            loadUsers();
-        })
-        .catch((error) => {
-            console.log('Error en la solicitud: ', error);
-            activaAlertaError('Algo ha salido mal');
-        });
-});
-
-
 updateBtn.addEventListener('click', () => {
-    const idUsuario = document.getElementById('idUsuarioUpdate')
-    const user = document.getElementById('userUpdate');
-    const password = document.getElementById('passwordUpdate');
-    const adminFalse = document.getElementById('adminUpdateFalse').checked;
-    let admin = 0
+    const userSearch = document.getElementById('search')
+    const dateInit = document.getElementById('dateInit')
+    const dateEnd = document.getElementById('dateEnd')
+    let state = 0
 
-    if (!adminFalse) {
-        admin = 1
+    if (userSearch.value && dateInit.value && dateEnd.value) {
+        console.log(state)
+        const sendData = {
+            state: state,
+            user: userSearch.value,
+            dateInit: dateInit.value,
+            dateEnd: dateEnd.value
+        };
+        fullSearch(sendData)
+    } else if (userSearch.value) {
+        state = 1
+        console.log(state)
+        const sendData = {
+            state: state,
+            user: userSearch.value,
+        };
+        fullSearch(sendData)
+    } else if (dateInit.value && dateInit.value) {
+        state = 2
+        console.log(state)
+        const sendData = {
+            state: state,
+            dateInit: dateInit.value,
+            dateEnd: dateEnd.value
+        };
+        fullSearch(sendData)
+    } else if (dateEnd || dateInit) {
+        console.log('Ingresa ambas fechas')
+    } else {
+        loadUsers()
     }
-    const sendData = {
-        idUsuario: idUsuario.value,
-        user: user.value,
-        password: password.value,
-        admin: admin
-    };
+})
 
-    fetch('./Backend/Files/updateUser.php', {
+const fullSearch = (sendData) => {
+    fetch('./Backend/Files/searchTokenLog.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
         headers: {
             'Content-Type': 'application/json',
         },
     })
-        .then(async (response) => {
-            const respuesta = await response.json();
-            if (respuesta.MESSAGE === '1') {
-                activaAlertaOk('Todo actualizado');
-            } else if (respuesta.MESSAGE === '2') {
-                activaAlertaOk('Usuario actualizado');
-            } else if (respuesta.MESSAGE === '3') {
-                activaAlertaOk('Privilegios Actualizados')
-            } else {
-                activaAlertaError('Algo ha salido mal');
-            }
-            loadUsers();
+        .then(async response => {
+            const res = await response.json();
+            if (res.STATUS === 'SUCCESS') {
+                TokensArray = res.TOKENS;
+                TokensArray.forEach((token) => {
+                    TokenTemplate.querySelector('th').textContent = token.id;
+                    TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
+                    TokenTemplate.querySelectorAll('td')[1].textContent = token.token;
+                    TokenTemplate.querySelectorAll('td')[2].textContent = token.useDate;
 
+                    const clone = TokenTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
+                    // Agregar fila clonada al contenedor de usuarios
+                    fragment.appendChild(clone);
+                });
+                TokenContainer.appendChild(fragment)
+            } else {
+                console.error('Error:', res.MESSAGE);
+            }
         })
-        .catch((error) => {
-            console.log('Error en la solicitud: ', error);
-            activaAlertaError('Algo ha salido mal');
+        .catch(error => {
+            console.error('Error al obtener usuarios:', error);
         });
-})
+};
