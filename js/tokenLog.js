@@ -25,6 +25,7 @@ const loadUsers = () => {
     fetch('./Backend/Files/getTokens.php')
         .then(async response => {
             const res = await response.json();
+            clearTable()
             if (res.STATUS === 'SUCCESS') {
                 TokensArray = res.TOKENS;
                 TokensArray.forEach((token) => {
@@ -54,7 +55,6 @@ const updateTokenTable = () => {
     let state = 0
 
     if (userSearch.value && dateInit.value && dateEnd.value) {
-        console.log(state)
         const sendData = {
             state: state,
             user: userSearch.value,
@@ -64,22 +64,20 @@ const updateTokenTable = () => {
         fullSearch(sendData)
     } else if (userSearch.value) {
         state = 1
-        console.log(state)
         const sendData = {
             state: state,
             user: userSearch.value,
         };
         fullSearch(sendData)
-    } else if (dateInit.value && dateInit.value) {
-        state = 2
-        console.log(state)
-        const sendData = {
-            state: state,
-            dateInit: dateInit.value,
-            dateEnd: dateEnd.value
-        };
-        fullSearch(sendData)
-    } else if (dateEnd || dateInit) {
+    } else if (dateInit.value && dateEnd.value) {
+            state = 2
+            const sendData = {
+                state: state,
+                dateInit: dateInit.value,
+                dateEnd: dateEnd.value
+            };
+            fullSearch(sendData)
+    } else if (dateInit.value || dateEnd.value) {
         console.log('Ingresa ambas fechas')
     } else {
         loadUsers()
@@ -91,7 +89,6 @@ const updateTokenTable = () => {
 }
 
 const fullSearch = (sendData) => {
-    console.log(sendData)
     fetch('./Backend/Files/searchTokenLog.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
