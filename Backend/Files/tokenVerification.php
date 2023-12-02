@@ -22,14 +22,13 @@ if ($body !== null && isset($body['token'])) {
                 $tokenMatched = true;
                 $userId = $storedToken['ta_id_user'];
                 $currentDate = date('Y-m-d'); // Obtener la fecha actual
-
+                // Insertar a la bitacora
                 $insertQuery = "INSERT INTO usedToken VALUES (null, :userId, :userToken, :currentDate)";
                 $insertStmt = $conn->prepare($insertQuery);
                 $insertStmt->bindParam(":userId", $userId, PDO::PARAM_INT);
                 $insertStmt->bindParam(":userToken", $userToken, PDO::PARAM_STR);
                 $insertStmt->bindParam(":currentDate", $currentDate, PDO::PARAM_STR);
                 $insertStmt->execute();
-                break; // Si hay coincidencia, detener la iteración
             }
         }
     }
