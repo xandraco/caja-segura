@@ -73,7 +73,7 @@ if ($user['admin'] == 0) {
                     <input placeholder="Hasta" type="text" class="form-control" id="dateEnd" />
                   </div>
                   <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                    <button type="submit" id='' class="btn btn-light">
+                    <button type="submit" id='btnUpdate' class="btn btn-light">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-search">
@@ -89,7 +89,7 @@ if ($user['admin'] == 0) {
         </div>
 
         <!-- Contenedor para la tabla de usuarios -->
-        <table id="TokenTable">
+        <table id="TokenTable" class="table">
           <thead>
             <tr>
               <th>ID</th>
