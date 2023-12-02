@@ -4,16 +4,20 @@ const TokenContainer = document.getElementById('TokenTable'); // Contenedor dond
 const TokenTemplate = document.getElementById('DataToken').content; // Plantilla HTML
 const fragment = document.createDocumentFragment()
 
-updateBtn = document.getElementById('btnUpdate')
-
 document.addEventListener('DOMContentLoaded', () => {
     loadUsers();
 
     $(function () {
-        $('#dateInit').datepicker({ uiLibrary: 'bootstrap5' });
+        $('#dateInit').datepicker({ uiLibrary: 'bootstrap5', format: 'yyyy-mm-dd' });
     });
     $(function () {
-        $('#dateEnd').datepicker({ uiLibrary: 'bootstrap5' });
+        $('#dateEnd').datepicker({ uiLibrary: 'bootstrap5', format: 'yyyy-mm-dd' });
+    });
+
+    const searchForm = document.getElementById('search-form');
+    searchForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Previene la recarga de la página por defecto al enviar el formulario
+        updateTokenTable();
     });
 });
 
@@ -43,7 +47,7 @@ const loadUsers = () => {
         });
 };
 
-updateBtn.addEventListener('click', () => {
+const updateTokenTable = () => {
     const userSearch = document.getElementById('search')
     const dateInit = document.getElementById('dateInit')
     const dateEnd = document.getElementById('dateEnd')
@@ -80,9 +84,14 @@ updateBtn.addEventListener('click', () => {
     } else {
         loadUsers()
     }
-})
+    // Limpiar campos después de enviar el formulario
+    userSearch.value = '';
+    dateInit.value = '';
+    dateEnd.value = '';
+}
 
 const fullSearch = (sendData) => {
+    console.log(sendData)
     fetch('./Backend/Files/searchTokenLog.php', {
         method: 'POST',
         body: JSON.stringify(sendData),
@@ -92,6 +101,7 @@ const fullSearch = (sendData) => {
     })
         .then(async response => {
             const res = await response.json();
+            clearTable();
             if (res.STATUS === 'SUCCESS') {
                 TokensArray = res.TOKENS;
                 TokensArray.forEach((token) => {
@@ -112,4 +122,14 @@ const fullSearch = (sendData) => {
         .catch(error => {
             console.error('Error al obtener usuarios:', error);
         });
+};
+
+const clearTable = () => {
+    // Obtiene todos los elementos de la tabla, excepto el primero
+    const rowsToKeep = Array.from(TokenContainer.querySelectorAll('tr')).slice(1);
+
+    // Elimina los elementos de la tabla, excepto el primero
+    rowsToKeep.forEach(row => {
+        TokenContainer.removeChild(row);
+    });
 };
