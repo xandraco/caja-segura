@@ -33,7 +33,6 @@ if (count($validemail) == 0) {
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => '1']);
     } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => $result]);
-
     }
 } else {
     // Usuario existe

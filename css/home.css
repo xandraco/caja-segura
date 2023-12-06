@@ -189,3 +189,6 @@ a:visited {
 a.admin-buttons span {
     display: inline-block !important; /* Ensures the link is treated as a block element */
 }
+.input-group-append {
+    cursor: pointer;
+ }

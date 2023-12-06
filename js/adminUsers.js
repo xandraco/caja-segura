@@ -155,32 +155,3 @@ updateBtn.addEventListener('click', () => {
             activaAlertaError('Algo ha salido mal');
         });
 })
-
-
-const activaAlertaError = mensaje => {
-    const alerta = document.getElementsByClassName('alert')
-    console.log('alerta', alerta)
-    alerta[0].innerHTML = mensaje
-    alerta[0].classList.remove('hide')
-    alerta[0].classList.add('show')
-    setTimeout(() => {
-        alerta[0].classList.remove('show')
-        alerta[0].classList.add('hide')
-    }, 3000)
-}
-
-const activaAlertaOk = mensaje => {
-    const alerta = document.getElementsByClassName('alert')
-    console.log('alerta', alerta)
-    alerta[0].innerHTML = mensaje
-    alerta[0].classList.remove('hide')
-    alerta[0].classList.add('show')
-    alerta[0].classList.remove('alert-danger')
-    alerta[0].classList.add('alert-success')
-    setTimeout(() => {
-        alerta[0].classList.remove('show')
-        alerta[0].classList.add('hide')
-        alerta[0].classList.remove('alert-success')
-        alerta[0].classList.add('alert-danger')
-    }, 3000)
-}
