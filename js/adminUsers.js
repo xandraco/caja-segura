@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Actualizar el valor del campo oculto con el ID del usuario seleccionado
             idUsuarioInput.value = idUsuario;
             $('editarUsuarioModal').modal('show');
+            console.log("usuario >>> ", idUsuarioInput)
         }
     });
 
@@ -40,11 +41,16 @@ const loadUsers = () => {
             const res = await response.json();
             if (res.STATUS === 'SUCCESS') {
                 usersArray = res.USERS;
+                console.log(usersArray)
                 usersArray.forEach((user) => {
                     userTemplate.querySelector('th').textContent = user.id;
                     userTemplate.querySelectorAll('td')[0].textContent = user.user;
                     userTemplate.querySelectorAll('td')[1].textContent = user.email;
-                    userTemplate.querySelectorAll('td')[2].textContent = user.admin;
+                    if (user.admin === 1) {
+                        userTemplate.querySelectorAll('td')[2].textContent = "Admin";
+                    } else {
+                        userTemplate.querySelectorAll('td')[2].textContent = "Ninguno";
+                    }
                     userTemplate.querySelectorAll('a')[0].setAttribute('data-user-id', user.id);
                     userTemplate.querySelectorAll('a')[1].href = `Backend/files/deleteUser.php?id=${user.id}`
 
