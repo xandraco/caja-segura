@@ -27,8 +27,8 @@ if ($user['admin'] == 0) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/66909aad39.js" crossorigin="anonymous"></script>
-
   <link rel="stylesheet" href="./css/home.css">
+  <link rel="icon" href="imgs/logo-ipower.png" type="image/x-icon">
 </head>
 
 <body>
@@ -40,9 +40,9 @@ if ($user['admin'] == 0) {
         <ul class="nav nav-pills nav-stacked">
           <?php if ($user['admin']) { ?>
             <div class="d-grid mt-2 w-100">
-              <li><a href="home.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Token de acceso</a></li>
-              <li><a href="adminUser.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Administrar usuarios</a></li>
-              <li><a href="tokenLog.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Bitácora de tokens</a></li>
+              <li><a href="home.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Token de acceso</a></li>
+              <li><a href="adminUser.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Administrar usuarios</a></li>
+              <li><a href="tokenLog.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Bitácora de tokens</a></li>
             </div>
           <?php } ?>
         </ul><br>
@@ -53,22 +53,26 @@ if ($user['admin'] == 0) {
 
       <div class="col-sm-9">
         <!-- Contenedor para la tabla de usuarios -->
-        <h2>Administrar Usuarios</h2>
-        <table id="TablaUsuarios" class="table">
-          <thead>
-            <tr>
-              <th>ID Token</th>
-              <th>Persona que lo uso</th>
-              <th>token</th>
-              <th>Privilegios</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody class="user-table">
-            <!-- Aquí se agregarán dinámicamente los usuarios -->
-          </tbody>
-        </table>
-        <button type="submit" id='btnAdd' class="btn btn-primary" class="AddUsuarioBtn" data-bs-toggle="modal" data-bs-target="#AddUsuarioModal">Agregar Usuario</button>
+        <div class="row">
+          <h2 class="col">Administrar Usuarios</h2>
+          <button type="submit" id='btnAdd' class="btn btn-primary col" class="AddUsuarioBtn" data-bs-toggle="modal" data-bs-target="#AddUsuarioModal">Agregar Usuario</button>
+        </div>
+        <div class="table-responsive">
+          <table id="TablaUsuarios" class="table">
+            <thead>
+              <tr>
+                <th>ID Token</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Privilegios</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="user-table">
+              <!-- Aquí se agregarán dinámicamente los usuarios -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -153,11 +157,6 @@ if ($user['admin'] == 0) {
         </div>
       </div>
     </div>
-
-    <footer class="container-fluid">
-      <p>Footer Text</p>
-    </footer>
-
   </div>
 
 
