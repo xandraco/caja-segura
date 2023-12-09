@@ -27,8 +27,8 @@ if ($user['admin'] == 0) {
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-
   <link rel="stylesheet" href="./css/home.css">
+  <link rel="icon" href="imgs/logo-ipower.png" type="image/x-icon">
 </head>
 
 <body>
@@ -40,11 +40,11 @@ if ($user['admin'] == 0) {
         <ul class="nav nav-pills nav-stacked">
           <?php if ($user['admin']) { ?>
             <div class="d-grid mt-2 w-100">
-              <li><a href="home.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Token de acceso</a>
+              <li><a href="home.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Token de acceso</a>
               </li>
-              <li><a href="adminUser.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Administrar
+              <li><a href="adminUser.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Administrar
                   usuarios</a></li>
-              <li><a href="tokenLog.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Bitácora de
+              <li><a href="tokenLog.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Bitácora de
                   tokens</a></li>
             </div>
           <?php } ?>
@@ -56,7 +56,7 @@ if ($user['admin'] == 0) {
       </div>
 
       <div class="col-sm-9">
-        <h2>Administrar Usuarios</h2>
+        <h2>Administrar Tokens</h2>
         <!-- Contenedor de buscador-->
         <div class="card-body ">
           <form id="search-form">
@@ -88,27 +88,24 @@ if ($user['admin'] == 0) {
           </form>
         </div>
 
-        <!-- Contenedor para la tabla de usuarios -->
-        <table id="TokenTable" class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Usuario</th>
-              <th>Token</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody class="Token-table">
-            <!-- Aquí se agregarán dinámicamente los usuarios -->
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <!-- Contenedor para la tabla de usuarios -->
+          <table id="TokenTable" class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Token</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody class="Token-table">
+              <!-- Aquí se agregarán dinámicamente los usuarios -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-
-    <footer class="container-fluid">
-      <p>Footer Text</p>
-    </footer>
-
   </div>
 
 

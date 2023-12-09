@@ -3,13 +3,10 @@ body {
     background-color: #32312e !important;
 }
 
-/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-.row.content {height: 1500px}
-
 /* Set gray background color and 100% height */
 .sidenav {
     background-color: #484848;
-    height: 100%;
+    height: 100vh!important;
 }
 
 /* Set black background color, white text and some padding */
@@ -133,7 +130,7 @@ footer {
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
     .sidenav {
-    height: auto;
+    height: auto!important;
     padding: 15px;
     }
     .row.content {height: auto;} 
@@ -156,6 +153,48 @@ footer {
     font-weight: 600 !important;
 }
 
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #fff;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: #fff;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #fff;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #fff;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+td {
+    padding: 0.5rem;
+}
+
+a:visited {
+    text-decoration: none!important;
+}
+
+.btn-success {
+    color: #198754!important;
+}
+.btn-danger {
+    color: #dc3545!important;
+}
+a.admin-buttons span {
+    display: inline-block !important; /* Ensures the link is treated as a block element */
+}
 .input-group-append {
     cursor: pointer;
-  }
+}
+
+.gj-picker {
+    background-color: #262626 !important;
+}
+
+.table-responsive {
+    max-height: 90vh;
+    overflow-y: auto!important;
+}

@@ -26,8 +26,9 @@ if ($user['admin'] == 0) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <script src="https://kit.fontawesome.com/66909aad39.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./css/home.css">
+  <link rel="icon" href="imgs/logo-ipower.png" type="image/x-icon">
 </head>
 
 <body>
@@ -39,9 +40,9 @@ if ($user['admin'] == 0) {
         <ul class="nav nav-pills nav-stacked">
           <?php if ($user['admin']) { ?>
             <div class="d-grid mt-2 w-100">
-              <li><a href="home.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Token de acceso</a></li>
-              <li><a href="adminUser.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Administrar usuarios</a></li>
-              <li><a href="tokenLog.php" class="btn btn-secondary rounded-pill w-100 mb-2" role="button">Bitácora de tokens</a></li>
+              <li><a href="home.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Token de acceso</a></li>
+              <li><a href="adminUser.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Administrar usuarios</a></li>
+              <li><a href="tokenLog.php" class="btn btn-secondary rounded w-100 mb-2" role="button">Bitácora de tokens</a></li>
             </div>
           <?php } ?>
         </ul><br>
@@ -52,22 +53,26 @@ if ($user['admin'] == 0) {
 
       <div class="col-sm-9">
         <!-- Contenedor para la tabla de usuarios -->
-        <h2>Administrar Usuarios</h2>
-        <table id="TablaUsuarios">
-          <thead>
-            <tr>
-              <th>ID Token</th>
-              <th>Persona que lo uso</th>
-              <th>token</th>
-              <th>Privilegios</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody class="user-table">
-            <!-- Aquí se agregarán dinámicamente los usuarios -->
-          </tbody>
-        </table>
-        <button type="submit" id='btnAdd' class="btn btn-primary" class="AddUsuarioBtn" data-bs-toggle="modal" data-bs-target="#AddUsuarioModal">Agregar Usuario</button>
+        <div class="row">
+          <h2 class="col">Administrar Usuarios</h2>
+          <button type="submit" id='btnAdd' class="btn btn-primary col" class="AddUsuarioBtn" data-bs-toggle="modal" data-bs-target="#AddUsuarioModal">Agregar Usuario</button>
+        </div>
+        <div class="table-responsive">
+          <table id="TablaUsuarios" class="table">
+            <thead>
+              <tr>
+                <th>ID Token</th>
+                <th>Usuario</th>
+                <th>Correo</th>
+                <th>Privilegios</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="user-table">
+              <!-- Aquí se agregarán dinámicamente los usuarios -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -76,11 +81,11 @@ if ($user['admin'] == 0) {
       aria-labelledby="editarUsuarioModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #484848!important;">
             <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="background-color: #32352E!important;">
             <!-- Formulario para editar usuario -->
             <form id="editarUsuarioForm">
               <input type="hidden" id="idUsuarioUpdate" name="idUsuario" value="">
@@ -115,11 +120,11 @@ if ($user['admin'] == 0) {
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color: #484848!important;">
           <h5 class="modal-title" id="AddUsuarioModalLabel">Agregar Usuario</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" style="background-color: #32312e!important;">
             <!-- Formulario para Agregar usuario -->
             <form id="AddUsuarioForm">
               <div class="form-group">
@@ -152,11 +157,6 @@ if ($user['admin'] == 0) {
         </div>
       </div>
     </div>
-
-    <footer class="container-fluid">
-      <p>Footer Text</p>
-    </footer>
-
   </div>
 
 
@@ -170,9 +170,11 @@ if ($user['admin'] == 0) {
       <td></td>
       <td>
         <!-- Botones para editar y borrar -->
-        <a href="#" class="editarUsuarioBtn" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"
-          data-user-id="">Editar</a>
-        <a href="">Borrar</a>
+        <a href="" class="editarUsuarioBtn btn btn-success admin-buttons fa-solid fa-pencil" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"
+          data-user-id="" role="button">
+        </a>
+        <a href="" class="btn btn-danger admin-buttons fa-solid fa-trash" role="button">
+        </a>
       </td>
     </tr>
   </template>
