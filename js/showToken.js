@@ -70,3 +70,19 @@ const updateCountDown = () => {
         timer = 60;
     }
 }
+
+
+window.addEventListener('beforeunload', function(event) {
+    fetch('./Backend/Files/DeleteToken.php', {
+        method: 'POST' // Envía una solicitud POST al servidor PHP
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.STATUS === 'SUCCESS') {
+            console.log('Token eliminada correctamente');
+        } else {
+            console.error('Error al eliminar token:', data.MESSAGE);
+        }
+    })
+    .catch(error => console.error('Error en la petición:', error));
+});
