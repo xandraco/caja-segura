@@ -28,6 +28,7 @@ const loadUsers = () => {
             clearTable()
             if (res.STATUS === 'SUCCESS') {
                 TokensArray = res.TOKENS;
+                TokensArray.reverse();
                 TokensArray.forEach((token) => {
                     TokenTemplate.querySelector('th').textContent = token.id;
                     TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
@@ -101,6 +102,7 @@ const fullSearch = (sendData) => {
             clearTable();
             if (res.STATUS === 'SUCCESS') {
                 TokensArray = res.TOKENS;
+                TokensArray.reverse();
                 TokensArray.forEach((token) => {
                     TokenTemplate.querySelector('th').textContent = token.id;
                     TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
