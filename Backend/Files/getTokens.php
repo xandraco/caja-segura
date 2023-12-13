@@ -7,7 +7,7 @@ $dataPost = file_get_contents('php://input');
 $conn = conectar();
 
 // Query para obtener usuarios
-$query = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate FROM usedToken JOIN users ON usedToken.ut_id_user = users.id;
+$query = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate, usedToken.useTime FROM usedToken JOIN users ON usedToken.ut_id_user = users.id;
 ";
 $stmt = $conn->prepare($query);
 $stmt->execute();

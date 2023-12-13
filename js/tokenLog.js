@@ -34,6 +34,7 @@ const loadUsers = () => {
                     TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
                     TokenTemplate.querySelectorAll('td')[1].textContent = token.token;
                     TokenTemplate.querySelectorAll('td')[2].textContent = token.useDate;
+                    TokenTemplate.querySelectorAll('td')[3].textContent = token.useTime;
 
                     const clone = TokenTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
                     // Agregar fila clonada al contenedor de usuarios
@@ -108,6 +109,7 @@ const fullSearch = (sendData) => {
                     TokenTemplate.querySelectorAll('td')[0].textContent = token.userName;
                     TokenTemplate.querySelectorAll('td')[1].textContent = token.token;
                     TokenTemplate.querySelectorAll('td')[2].textContent = token.useDate;
+                    TokenTemplate.querySelectorAll('td')[3].textContent = token.useTime;
 
                     const clone = TokenTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
                     // Agregar fila clonada al contenedor de usuarios

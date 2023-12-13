@@ -97,6 +97,7 @@ if ($user['admin'] == 0) {
                 <th>Usuario</th>
                 <th>Token</th>
                 <th>Fecha</th>
+                <th>Hora</th>
               </tr>
             </thead>
             <tbody class="Token-table">
@@ -114,6 +115,7 @@ if ($user['admin'] == 0) {
     <!-- Plantilla para mostrar datos de usuario -->
     <tr>
       <th></th>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>

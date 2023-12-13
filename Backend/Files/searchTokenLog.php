@@ -11,7 +11,7 @@ if ($state == 0) {
     $dateInit = $body['dateInit'];
     $dateEnd = $body['dateEnd'];
 
-    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE usedToken.useDate BETWEEN :dateInit AND :dateEnd AND users.user LIKE :user";
+    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate, usedToken.useTime FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE usedToken.useDate BETWEEN :dateInit AND :dateEnd AND users.user LIKE :user";
     $stmt = $conn->prepare($queryver);
     $stmt->bindParam(":user", $user, PDO::PARAM_STR);
     $stmt->bindParam(":dateInit", $dateInit, PDO::PARAM_STR);
@@ -26,7 +26,7 @@ if ($state == 0) {
 } else if ($state == 1) {
     $user = '%' . $body['user'] . '%';
 
-    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE users.user LIKE :user";
+    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate, usedToken.useTime FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE users.user LIKE :user";
     $stmt = $conn->prepare($queryver);
     $stmt->bindParam(":user", $user, PDO::PARAM_STR);
     $stmt->execute();
@@ -40,7 +40,7 @@ if ($state == 0) {
     $dateInit = $body['dateInit'];
     $dateEnd = $body['dateEnd'];
 
-    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE usedToken.useDate BETWEEN :dateInit AND :dateEnd";
+    $queryver = "SELECT usedToken.id, users.user AS userName, usedToken.token, usedToken.useDate, usedToken.useTime FROM usedToken JOIN users ON usedToken.ut_id_user = users.id WHERE usedToken.useDate BETWEEN :dateInit AND :dateEnd";
     $stmt = $conn->prepare($queryver);
     $stmt->bindParam(":dateInit", $dateInit, PDO::PARAM_STR);
     $stmt->bindParam(":dateEnd", $dateEnd, PDO::PARAM_STR);
