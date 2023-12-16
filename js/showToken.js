@@ -10,6 +10,7 @@ let remainingSeconds;
 let countDown; // Declarar la variable globalmente
 
 document.addEventListener('DOMContentLoaded', () => {
+    clearInterval(countDown);
     DataUserToken()
     CounterDisplay.textContent = timer.toString()
 })
