@@ -29,6 +29,7 @@ const DataUserToken = () => {
 
 const loadToken = () => {
     genToken(); // Generar token al inicio
+    timer = 60;
     countDown = setInterval(updateCountDown, 1000);
 }
 
@@ -81,10 +82,20 @@ window.addEventListener('pagehide', function(event) {
     deleteToken(); // Llama a la función para enviar los datos al servidor
 });
 
+// Este evento se activa cuando la página se muestra de nuevo
+window.addEventListener('pageshow', function(event) {
+    // Llama a la función para cargar los tokens nuevamente
+    loadToken();
+});
+
 // Este evento se activa cuando la visibilidad de la página cambia (como cambiar a otra pestaña)
 document.addEventListener('visibilitychange', function(event) {
     if (document.visibilityState === 'hidden') {
         deleteToken(); // Llama a la función para enviar los datos al servidor
+    }
+    else if (document.visibilityState === 'visible') {
+        // Llama a la función para cargar los tokens nuevamente
+        loadToken();
     }
 });
 
