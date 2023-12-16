@@ -7,6 +7,7 @@ const CounterDisplay = document.getElementById('counter');
 const TimeBar = document.getElementById('timeBar');
 let timer = 60;
 let remainingSeconds;
+let countDown; // Declarar la variable globalmente
 
 document.addEventListener('DOMContentLoaded', () => {
     DataUserToken()
