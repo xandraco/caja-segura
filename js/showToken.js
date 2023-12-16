@@ -87,6 +87,7 @@ window.addEventListener('pagehide', function(event) {
 window.addEventListener('pageshow', function(event) {
     // Llama a la función para cargar los tokens nuevamente
     loadToken();
+    clearInterval(countDown);
 });
 
 // Este evento se activa cuando la visibilidad de la página cambia (como cambiar a otra pestaña)
@@ -97,11 +98,11 @@ document.addEventListener('visibilitychange', function(event) {
     else if (document.visibilityState === 'visible') {
         // Llama a la función para cargar los tokens nuevamente
         loadToken();
+        clearInterval(countDown);
     }
 });
 
 const deleteToken = () => {
-    clearInterval(countDown);
     fetch('./Backend/Files/DeleteToken.php', {
         method: 'POST' // Envía una solicitud POST al servidor PHP
     })
