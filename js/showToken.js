@@ -102,8 +102,6 @@ document.addEventListener('visibilitychange', function(event) {
 
 const deleteToken = () => {
     clearInterval(countDown);
-    timer = 60;
-    updateCountDown();
     fetch('./Backend/Files/DeleteToken.php', {
         method: 'POST' // Envía una solicitud POST al servidor PHP
     })
