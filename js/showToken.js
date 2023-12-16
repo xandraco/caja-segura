@@ -73,6 +73,22 @@ const updateCountDown = () => {
 
 
 window.addEventListener('beforeunload', function(event) {
+    deleteToken()
+});
+
+// Este evento se activa cuando la página se está ocultando (cambio de página o cierre de la aplicación)
+window.addEventListener('pagehide', function(event) {
+    deleteToken(); // Llama a la función para enviar los datos al servidor
+});
+
+// Este evento se activa cuando la visibilidad de la página cambia (como cambiar a otra pestaña)
+document.addEventListener('visibilitychange', function(event) {
+    if (document.visibilityState === 'hidden') {
+        deleteToken(); // Llama a la función para enviar los datos al servidor
+    }
+});
+
+const deleteToken = () => {
     fetch('./Backend/Files/DeleteToken.php', {
         method: 'POST' // Envía una solicitud POST al servidor PHP
     })
@@ -85,4 +101,4 @@ window.addEventListener('beforeunload', function(event) {
         }
     })
     .catch(error => console.error('Error en la petición:', error));
-});
+}
