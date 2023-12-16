@@ -52,7 +52,7 @@ const loadUsers = () => {
                         userTemplate.querySelectorAll('td')[2].textContent = "Ninguno";
                     }
                     userTemplate.querySelectorAll('a')[0].setAttribute('data-user-id', user.id);
-                    userTemplate.querySelectorAll('a')[1].href = `Backend/files/deleteUser.php?id=${user.id}`
+                    userTemplate.querySelectorAll('a')[1].href = `Backend/Files/deleteUser.php?id=${user.id}`
 
 
                     const clone = userTemplate.cloneNode(true); // Clonar la plantilla para cada usuario
