@@ -28,6 +28,7 @@ const DataUserToken = () => {
 }
 
 const loadToken = () => {
+    clearInterval(countDown);
     genToken(); // Generar token al inicio
     timer = 60;
     countDown = setInterval(updateCountDown, 1000);
