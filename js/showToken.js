@@ -9,6 +9,8 @@ let timer = 60;
 let remainingSeconds;
 let countDown; // Declarar la variable globalmente
 
+const eventSource = new EventSource('./Backend/Files/server.php');//new
+
 document.addEventListener('DOMContentLoaded', () => {
     clearInterval(countDown);
     DataUserToken()
@@ -117,3 +119,18 @@ const deleteToken = () => {
     })
     .catch(error => console.error('Error en la petición:', error));
 }
+
+
+
+//new
+
+
+eventSource.addEventListener('reloadToken', function(event) {
+    // Cuando se recibe el evento 'reloadToken', recarga la página o realiza las acciones necesarias
+    location.reload(); // Recarga la página
+});
+
+eventSource.addEventListener('error', function(event) {
+    // Manejo de errores si ocurre algún problema con la conexión
+    console.error('Error en la conexión del EventSource:', event);
+});

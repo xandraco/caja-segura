@@ -39,6 +39,7 @@ if ($body !== null && isset($body['token'])) {
 
     // Comprobar si se encontró una coincidencia o no
     if ($tokenMatched) {
+        sse_send_event('reloadToken');
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token valido']);
     } else {
         echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Token invalido']);
@@ -46,5 +47,14 @@ if ($body !== null && isset($body['token'])) {
 } else {
     http_response_code(400);
     echo json_encode(['STATUS' => 'ERROR', 'MESSAGE' => 'Datos inválidos']);
+}
+
+function sse_send_event($event_name) {
+    header('Content-Type: text/event-stream');
+    header('Cache-Control: no-cache');
+    echo "event: $event_name\n";
+    echo "data: {}\n\n";
+    ob_flush();
+    flush();
 }
 ?>
