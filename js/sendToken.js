@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const token = document.getElementById('tokenInput').value;
         sendTokenToVerification(token);
-        token = '';
+        document.getElementById('tokenForm').reset();
     });
 });
 
