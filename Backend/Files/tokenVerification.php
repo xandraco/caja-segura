@@ -40,8 +40,6 @@ if ($body !== null && isset($body['token'])) {
     // Comprobar si se encontró una coincidencia o no
     if ($tokenMatched) {
         echo json_encode(['STATUS' => 'SUCCESS', 'MESSAGE' => 'Token valido']);
-        ob_flush(); // Envía la respuesta JSON al cliente
-
         // Envía el evento SSE 'reloadToken' al cliente
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
